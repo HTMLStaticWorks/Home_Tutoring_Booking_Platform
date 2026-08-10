@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorly | Find a Tutor</title>
+  <meta name="description" content="Browse verified, trusted tutors for your child.">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link id="rtl-stylesheet" rel="stylesheet" href="assets/css/rtl.css" disabled>
+</head>
+
+<body style="background-color: var(--color-bg-alt);">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="logo">
+        <i class="ph ph-student"></i> Tutorly
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="home2.html" class="nav-link">Home 2</a>
+        <a href="find-tutor.html" class="nav-link active">Find a Tutor</a>
+        <a href="subjects.html" class="nav-link">Subjects</a>
+        <a href="how-it-works.html" class="nav-link">How It Works</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="rtl-toggle" aria-label="Toggle RTL" title="Toggle RTL">
+          <i class="ph ph-arrows-left-right"></i>
+        </button>
+        <button class="theme-toggle" aria-label="Toggle Theme" title="Toggle Theme">
+          <i class="ph ph-moon"></i>
+        </button>
+        <a href="login.html" class="btn btn-primary d-none d-lg-flex">Login</a>
+        <button class="mobile-menu-btn">
+          <i class="ph ph-list"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer-overlay"></div>
+  <aside class="mobile-drawer">
+    <div class="drawer-header">
+      <a href="index.html" class="logo">
+        <i class="ph ph-student"></i> Tutorly
+      </a>
+      <button class="close-drawer">
+        <i class="ph ph-x"></i>
+      </button>
+    </div>
+    <nav class="drawer-nav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="home2.html" class="nav-link">Home 2</a>
+      <a href="find-tutor.html" class="nav-link active">Find a Tutor</a>
+      <a href="subjects.html" class="nav-link">Subjects</a>
+      <a href="how-it-works.html" class="nav-link">How It Works</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+    </nav>
+    <div class="drawer-actions">
+      <a href="login.html" class="btn btn-primary">Login</a>
+      <div class="drawer-toggles">
+        <button class="rtl-toggle btn btn-outline" aria-label="Toggle RTL" style="flex: 1;">
+          <i class="ph ph-arrows-left-right"></i> RTL
+        </button>
+        <button class="theme-toggle btn btn-outline" aria-label="Toggle Theme" style="flex: 1;">
+          <i class="ph ph-moon"></i> Theme
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Page Header -->
+  <div class="page-header pt-16 pb-8 text-center" style="margin-top: 80px;">
+    <div class="container">
+      <h1 class="section-title mb-2">Find a Tutor</h1>
+      <p class="section-subtitle">Browse profiles of verified educators across all subjects and grade levels.</p>
+    </div>
+  </div>
+
+  <main class="py-8">
+    <div class="container">
+      <div style="display: flex; gap: var(--spacing-8); align-items: flex-start;">
+
+        <!-- Filters Sidebar (becomes an off-canvas drawer under 1025px) -->
+        <div class="filters-overlay" data-filters-overlay></div>
+        <aside class="filters-sidebar" id="filters-panel" aria-label="Tutor filters">
+          <div class="card filters-card">
+            <div class="filters-head">
+              <h3 class="d-flex align-center gap-2"><i class="ph ph-faders"></i> Filters</h3>
+              <button type="button" class="filters-close" data-filters-close aria-label="Close filters">
+                <i class="ph ph-x"></i>
+              </button>
+            </div>
+
+            <div class="form-group w-100">
+              <label class="form-label">Subject</label>
+              <select class="form-control">
+                <option value="">All Subjects</option>
+                <option value="math">Mathematics</option>
+                <option value="science">Sciences</option>
+                <option value="english">English</option>
+                <option value="languages">Languages</option>
+                <option value="test-prep">Test Prep</option>
+              </select>
+            </div>
+
+            <div class="form-group w-100">
+              <label class="form-label">Grade Level</label>
+              <select class="form-control">
+                <option value="">All Grades</option>
+                <option value="elementary">Elementary (K-5)</option>
+                <option value="middle">Middle (6-8)</option>
+                <option value="high">High School (9-12)</option>
+                <option value="college">College</option>
+              </select>
+            </div>
+
+            <div class="form-group w-100">
+              <label class="form-label">Hourly Rate</label>
+              <select class="form-control">
+                <option value="">Any Price</option>
+                <option value="under-30">Under $30</option>
+                <option value="30-50">$30 - $50</option>
+                <option value="50-80">$50 - $80</option>
+                <option value="over-80">Over $80</option>
+              </select>
+            </div>
+
+            <div class="form-group w-100">
+              <label class="form-label">Availability</label>
+              <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                  <input type="checkbox"> Weekdays
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                  <input type="checkbox"> Weekends
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                  <input type="checkbox"> Evenings
+                </label>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-primary w-100 mt-4" style="width: 100%;" data-filters-apply>Apply
+              Filters</button>
+          </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div style="flex: 1; min-width: 0;">
+          <div class="listing-toolbar mb-6">
+            <button type="button" class="btn btn-outline filters-toggle" data-filters-open aria-controls="filters-panel"
+              aria-expanded="false">
+              <i class="ph ph-faders"></i> Filters
+            </button>
+            <p class="text-muted">Showing <strong>24</strong> verified tutors</p>
+            <div class="d-flex align-center gap-2">
+              <span class="text-muted" style="font-size: 14px;">Sort by:</span>
+              <select class="form-control" style="width: auto; padding: 8px 12px;">
+                <option>Highest Rated</option>
+                <option>Lowest Price</option>
+                <option>Highest Price</option>
+                <option>Most Reviews</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <!-- Tutor 1 -->
+            <div class="card tutor-card">
+              <div class="tutor-img-wrap">
+                <img src="assets/images/listing-sarah-j.jpg" alt="Sarah J." class="tutor-img">
+              </div>
+              <div class="tutor-content">
+                <div class="tutor-header">
+                  <div>
+                    <h3 class="tutor-name">Sarah J.</h3>
+                    <div class="tutor-rate">$45/hr</div>
+                  </div>
+                  <div class="badge badge-rating"><i class="ph-fill ph-star"></i> 4.9 (42)</div>
+                </div>
+                <div class="tutor-badges">
+                  <span class="badge badge-verified"><i class="ph ph-shield-check"></i> Verified</span>
+                  <span class="badge badge-subject">Mathematics</span>
+                  <span class="badge badge-subject">Grades 6-12</span>
+                </div>
+                <p class="tutor-bio">Former high school math teacher with 8 years of experience helping students conquer
+                  algebra and calculus.</p>
+                <div class="d-flex gap-2 mt-4" style="width: 100%;">
+                  <button class="btn btn-outline" style="flex: 1;"><i class="ph ph-chat-circle"></i> Message</button>
+                  <a href="#" class="btn btn-primary" style="flex: 1;">Book Lesson</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tutor 2 -->
+            <div class="card tutor-card">
+              <div class="tutor-img-wrap">
+                <img src="assets/images/listing-david-m.jpg" alt="David M." class="tutor-img">
+              </div>
+              <div class="tutor-content">
+                <div class="tutor-header">
+                  <div>
+                    <h3 class="tutor-name">David M.</h3>
+                    <div class="tutor-rate">$55/hr</div>
+                  </div>
+                  <div class="badge badge-rating"><i class="ph-fill ph-star"></i> 5.0 (28)</div>
+                </div>
+                <div class="tutor-badges">
+                  <span class="badge badge-verified"><i class="ph ph-shield-check"></i> Verified</span>
+                  <span class="badge badge-subject">Sciences</span>
+                  <span class="badge badge-subject">AP Physics</span>
+                </div>
+                <p class="tutor-bio">PhD candidate in Physics. Passionate about making complex scientific concepts
+                  intuitive and fun to learn.</p>
+                <div class="d-flex gap-2 mt-4" style="width: 100%;">
+                  <button class="btn btn-outline" style="flex: 1;"><i class="ph ph-chat-circle"></i> Message</button>
+                  <a href="#" class="btn btn-primary" style="flex: 1;">Book Lesson</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tutor 3 -->
+            <div class="card tutor-card">
+              <div class="tutor-img-wrap">
+                <img src="assets/images/listing-elena-r.jpg" alt="Elena R." class="tutor-img">
+              </div>
+              <div class="tutor-content">
+                <div class="tutor-header">
+                  <div>
+                    <h3 class="tutor-name">Elena R.</h3>
+                    <div class="tutor-rate">$40/hr</div>
+                  </div>
+                  <div class="badge badge-rating"><i class="ph-fill ph-star"></i> 4.8 (65)</div>
+                </div>
+                <div class="tutor-badges">
+                  <span class="badge badge-verified"><i class="ph ph-shield-check"></i> Verified</span>
+                  <span class="badge badge-subject">Languages</span>
+                  <span class="badge badge-subject">Spanish</span>
+                </div>
+                <p class="tutor-bio">Native Spanish speaker offering conversational practice, grammar lessons, and AP
+                  test preparation.</p>
+                <div class="d-flex gap-2 mt-4" style="width: 100%;">
+                  <button class="btn btn-outline" style="flex: 1;"><i class="ph ph-chat-circle"></i> Message</button>
+                  <a href="#" class="btn btn-primary" style="flex: 1;">Book Lesson</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tutor 4 -->
+            <div class="card tutor-card">
+              <div class="tutor-img-wrap">
+                <img src="assets/images/listing-michael-t.jpg" alt="Michael T." class="tutor-img">
+              </div>
+              <div class="tutor-content">
+                <div class="tutor-header">
+                  <div>
+                    <h3 class="tutor-name">Michael T.</h3>
+                    <div class="tutor-rate">$35/hr</div>
+                  </div>
+                  <div class="badge badge-rating"><i class="ph-fill ph-star"></i> 4.7 (112)</div>
+                </div>
+                <div class="tutor-badges">
+                  <span class="badge badge-verified"><i class="ph ph-shield-check"></i> Verified</span>
+                  <span class="badge badge-subject">English</span>
+                  <span class="badge badge-subject">Grades K-8</span>
+                </div>
+                <p class="tutor-bio">Specializing in reading comprehension and creative writing. Helping younger
+                  students develop a love for literature.</p>
+                <div class="d-flex gap-2 mt-4" style="width: 100%;">
+                  <button class="btn btn-outline" style="flex: 1;"><i class="ph ph-chat-circle"></i> Message</button>
+                  <a href="#" class="btn btn-primary" style="flex: 1;">Book Lesson</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pagination -->
+          <div class="d-flex justify-center mt-8 gap-2">
+            <button class="btn btn-outline" style="padding: 8px 16px;">&laquo; Prev</button>
+            <button class="btn btn-primary" style="padding: 8px 16px;">1</button>
+            <button class="btn btn-outline" style="padding: 8px 16px;">2</button>
+            <button class="btn btn-outline" style="padding: 8px 16px;">3</button>
+            <button class="btn btn-outline" style="padding: 8px 16px;">Next &raquo;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer mt-16">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <i class="ph ph-student"></i> Tutorly
+          </a>
+          <p>The premium home tutoring booking platform connecting parents with thoroughly vetted, expert educators.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="ph ph-facebook-logo"></i></a>
+            <a href="#" class="social-link"><i class="ph ph-x-logo"></i></a>
+            <a href="#" class="social-link"><i class="ph ph-instagram-logo"></i></a>
+            <a href="#" class="social-link"><i class="ph ph-linkedin-logo"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Platform</h4>
+          <div class="footer-links">
+            <a href="find-tutor.html">Find a Tutor</a>
+            <a href="subjects.html">Subjects & Services</a>
+            <a href="how-it-works.html">How It Works</a>
+            <a href="pricing.html">Pricing Plans</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Company</h4>
+          <div class="footer-links">
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Support</a>
+            <a href="#">Trust & Safety</a>
+            <a href="#">Become a Tutor</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Legal</h4>
+          <div class="footer-links">
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Cancellation Policy</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Tutorly Platform. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>

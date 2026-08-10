@@ -1,1 +1,485 @@
-test
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorly | Home Tutoring Booking Platform</title>
+  <meta name="description"
+    content="Find verified, trusted tutors for your child. The premium home tutoring booking platform.">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link id="rtl-stylesheet" rel="stylesheet" href="assets/css/rtl.css" disabled>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="logo">
+        <i class="ph ph-student"></i> Tutorly
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="home2.html" class="nav-link">Home 2</a>
+        <a href="find-tutor.html" class="nav-link">Find a Tutor</a>
+        <a href="subjects.html" class="nav-link">Subjects</a>
+        <a href="how-it-works.html" class="nav-link">How It Works</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="rtl-toggle" aria-label="Toggle RTL" title="Toggle RTL">
+          <i class="ph ph-arrows-left-right"></i>
+        </button>
+        <button class="theme-toggle" aria-label="Toggle Theme" title="Toggle Theme">
+          <i class="ph ph-moon"></i>
+        </button>
+        <a href="login.html" class="btn btn-primary d-none d-lg-flex">Login</a>
+        <button class="mobile-menu-btn">
+          <i class="ph ph-list"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer-overlay"></div>
+  <aside class="mobile-drawer">
+    <div class="drawer-header">
+      <a href="index.html" class="logo">
+        <i class="ph ph-student"></i> Tutorly
+      </a>
+      <button class="close-drawer">
+        <i class="ph ph-x"></i>
+      </button>
+    </div>
+    <nav class="drawer-nav">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="home2.html" class="nav-link">Home 2</a>
+      <a href="find-tutor.html" class="nav-link">Find a Tutor</a>
+      <a href="subjects.html" class="nav-link">Subjects</a>
+      <a href="how-it-works.html" class="nav-link">How It Works</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+    </nav>
+    <div class="drawer-actions">
+      <a href="login.html" class="btn btn-primary">Login</a>
+      <div class="drawer-toggles">
+        <button class="rtl-toggle btn btn-outline" aria-label="Toggle RTL" style="flex: 1;">
+          <i class="ph ph-arrows-left-right"></i> RTL
+        </button>
+        <button class="theme-toggle btn btn-outline" aria-label="Toggle Theme" style="flex: 1;">
+          <i class="ph ph-moon"></i> Theme
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero hero-split">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <span class="hero-eyebrow">
+            <i class="ph ph-shield-check"></i> Every tutor background-checked &amp; interviewed
+          </span>
+          <h1 class="hero-title">Find a <span>Verified Tutor</span> You Can Trust</h1>
+          <p class="hero-subtitle">Connect with top-rated, background-checked educators for personalized in-home or
+            online tutoring. Empower your child's learning journey today.</p>
+          <div class="hero-actions">
+            <a href="find-tutor.html" class="btn btn-primary">Find Your Child's Tutor</a>
+            <a href="how-it-works.html" class="btn btn-outline">See How It Works</a>
+          </div>
+
+          <div class="hero-trust">
+            <div class="hero-avatars">
+              <img src="assets/images/avatar-parent-1.jpg" alt="">
+              <img src="assets/images/avatar-parent-2.jpg" alt="">
+              <img src="assets/images/avatar-parent-3.jpg" alt="">
+              <img src="assets/images/avatar-parent-4.jpg" alt="">
+            </div>
+            <div>
+              <div class="hero-stars">
+                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                  class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                <span class="hero-rating">4.9</span>
+              </div>
+              <p class="hero-trust-label">from 2,400+ verified parent reviews</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-visual-frame">
+            <img src="assets/images/hero-tutor-student.jpg" alt="A tutor working one-on-one with a student">
+          </div>
+
+          <div class="hero-float hero-float-top">
+            <div class="hero-float-icon"><i class="ph ph-shield-check"></i></div>
+            <div>
+              <strong>Background verified</strong>
+              <span>ID, credentials &amp; interview</span>
+            </div>
+          </div>
+
+          <div class="hero-float hero-float-bottom">
+            <div class="hero-float-icon accent"><i class="ph ph-chart-line-up"></i></div>
+            <div>
+              <strong>+2 grade levels</strong>
+              <span>Average gain within 6 months</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-16">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">How It Works</h2>
+          <p class="section-subtitle">A simple, secure process to support your child's education.</p>
+        </div>
+        <div class="steps-grid">
+          <div class="step-card text-center">
+            <div class="step-number mx-auto">1</div>
+            <h3>Search Tutors</h3>
+            <p class="text-muted mt-2">Browse profiles of vetted educators by subject, grade level, and availability.
+            </p>
+          </div>
+          <div class="step-card text-center">
+            <div class="step-number mx-auto">2</div>
+            <h3>Book Sessions</h3>
+            <p class="text-muted mt-2">Schedule one-on-one lessons easily using our secure scheduling platform.</p>
+          </div>
+          <div class="step-card text-center">
+            <div class="step-number mx-auto">3</div>
+            <h3>Learn & Grow</h3>
+            <p class="text-muted mt-2">Watch your child gain confidence through personalized, focused learning.</p>
+          </div>
+          <div class="step-card text-center">
+            <div class="step-number mx-auto">4</div>
+            <h3>Track Progress</h3>
+            <p class="text-muted mt-2">Receive detailed Progress Notes from tutors after every single session.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Subjects Section -->
+    <section class="py-16 band-alt">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Subjects & Services</h2>
+          <p class="section-subtitle">Comprehensive support across all major grade levels and curricula.</p>
+        </div>
+        <div class="subjects-grid">
+          <div class="card subject-card">
+            <div
+              style="width: 100%; height: 160px; border-radius: var(--border-radius-lg); overflow: hidden; margin-bottom: var(--spacing-5);">
+              <img src="assets/images/subject-mathematics.jpg" alt="Mathematics tutoring"
+                style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="subject-icon">
+              <i class="ph ph-calculator"></i>
+            </div>
+            <h3>Mathematics</h3>
+            <p class="text-muted mt-2">Algebra, Geometry, Calculus & beyond.</p>
+            <a href="find-tutor.html" class="text-primary mt-4 d-flex align-center gap-2">View Tutors <i
+                class="ph ph-arrow-right"></i></a>
+          </div>
+          <div class="card subject-card">
+            <div
+              style="width: 100%; height: 160px; border-radius: var(--border-radius-lg); overflow: hidden; margin-bottom: var(--spacing-5);">
+              <img src="assets/images/subject-sciences.jpg" alt="Sciences tutoring"
+                style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="subject-icon">
+              <i class="ph ph-atom"></i>
+            </div>
+            <h3>Sciences</h3>
+            <p class="text-muted mt-2">Biology, Chemistry, Physics.</p>
+            <a href="find-tutor.html" class="text-primary mt-4 d-flex align-center gap-2">View Tutors <i
+                class="ph ph-arrow-right"></i></a>
+          </div>
+          <div class="card subject-card">
+            <div
+              style="width: 100%; height: 160px; border-radius: var(--border-radius-lg); overflow: hidden; margin-bottom: var(--spacing-5);">
+              <img src="assets/images/subject-languages.jpg" alt="Languages tutoring"
+                style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="subject-icon">
+              <i class="ph ph-translate"></i>
+            </div>
+            <h3>Languages</h3>
+            <p class="text-muted mt-2">English, Spanish, French, ESL.</p>
+            <a href="find-tutor.html" class="text-primary mt-4 d-flex align-center gap-2">View Tutors <i
+                class="ph ph-arrow-right"></i></a>
+          </div>
+          <div class="card subject-card">
+            <div
+              style="width: 100%; height: 160px; border-radius: var(--border-radius-lg); overflow: hidden; margin-bottom: var(--spacing-5);">
+              <img src="assets/images/subject-test-prep.jpg" alt="Test Prep tutoring"
+                style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="subject-icon">
+              <i class="ph ph-exam"></i>
+            </div>
+            <h3>Test Prep</h3>
+            <p class="text-muted mt-2">SAT, ACT, AP Exams preparation.</p>
+            <a href="find-tutor.html" class="text-primary mt-4 d-flex align-center gap-2">View Tutors <i
+                class="ph ph-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="text-center mt-8">
+          <a href="subjects.html" class="btn btn-outline">Explore All Subjects</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Tutors -->
+    <section class="py-16">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Featured Verified Tutors</h2>
+          <p class="section-subtitle">Meet some of our highest-rated educators, thoroughly vetted for your peace of
+            mind.</p>
+        </div>
+        <div class="grid-3">
+          <!-- Tutor 1 -->
+          <div class="card tutor-card">
+            <div class="tutor-img-wrap">
+              <img src="assets/images/tutor-sarah-j.jpg" alt="Sarah J." class="tutor-img">
+            </div>
+            <div class="tutor-content">
+              <div class="tutor-header">
+                <div>
+                  <h3 class="tutor-name">Sarah J.</h3>
+                  <div class="tutor-rate">$45/hr</div>
+                </div>
+                <div class="badge badge-rating"><i class="ph-fill ph-star"></i> 4.9 (42)</div>
+              </div>
+              <div class="tutor-badges">
+                <span class="badge badge-verified"><i class="ph ph-shield-check"></i> Verified</span>
+                <span class="badge badge-subject">Mathematics</span>
+                <span class="badge badge-subject">Grades 6-12</span>
+              </div>
+              <p class="tutor-bio">Former high school math teacher with 8 years of experience helping students conquer
+                algebra and calculus.</p>
+              <a href="find-tutor.html" class="btn btn-primary" style="width: 100%; margin-top: var(--spacing-4);">View
+                Profile</a>
+            </div>
+          </div>
+
+          <!-- Tutor 2 -->
+          <div class="card tutor-card">
+            <div class="tutor-img-wrap">
+              <img src="assets/images/tutor-david-m.jpg" alt="David M." class="tutor-img">
+            </div>
+            <div class="tutor-content">
+              <div class="tutor-header">
+                <div>
+                  <h3 class="tutor-name">David M.</h3>
+                  <div class="tutor-rate">$55/hr</div>
+                </div>
+                <div class="badge badge-rating"><i class="ph-fill ph-star"></i> 5.0 (28)</div>
+              </div>
+              <div class="tutor-badges">
+                <span class="badge badge-verified"><i class="ph ph-shield-check"></i> Verified</span>
+                <span class="badge badge-subject">Sciences</span>
+                <span class="badge badge-subject">AP Physics</span>
+              </div>
+              <p class="tutor-bio">PhD candidate in Physics. Passionate about making complex scientific concepts
+                intuitive and fun to learn.</p>
+              <a href="find-tutor.html" class="btn btn-primary" style="width: 100%; margin-top: var(--spacing-4);">View
+                Profile</a>
+            </div>
+          </div>
+
+          <!-- Tutor 3 -->
+          <div class="card tutor-card">
+            <div class="tutor-img-wrap">
+              <img src="assets/images/tutor-elena-r.jpg" alt="Elena R." class="tutor-img">
+            </div>
+            <div class="tutor-content">
+              <div class="tutor-header">
+                <div>
+                  <h3 class="tutor-name">Elena R.</h3>
+                  <div class="tutor-rate">$40/hr</div>
+                </div>
+                <div class="badge badge-rating"><i class="ph-fill ph-star"></i> 4.8 (65)</div>
+              </div>
+              <div class="tutor-badges">
+                <span class="badge badge-verified"><i class="ph ph-shield-check"></i> Verified</span>
+                <span class="badge badge-subject">Languages</span>
+                <span class="badge badge-subject">Spanish</span>
+              </div>
+              <p class="tutor-bio">Native Spanish speaker offering conversational practice, grammar lessons, and AP test
+                preparation.</p>
+              <a href="find-tutor.html" class="btn btn-primary" style="width: 100%; margin-top: var(--spacing-4);">View
+                Profile</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About / Trust Section -->
+    <section class="py-16 band-alt">
+      <div class="container grid-2 align-center">
+        <div>
+          <img src="assets/images/about-mother-child-studying.jpg" alt="Mother and child studying"
+            style="border-radius: var(--border-radius-lg); box-shadow: var(--shadow-lg);">
+        </div>
+        <div style="padding-left: var(--spacing-8);">
+          <h2 class="section-title" style="text-align: left; margin-bottom: var(--spacing-4);">Safety First. Always.
+          </h2>
+          <p class="text-muted mb-4">We know that inviting a tutor into your home—whether physically or
+            virtually—requires absolute trust. That's why our vetting process is the most rigorous in the industry.</p>
+          <ul style="display: flex; flex-direction: column; gap: var(--spacing-3);">
+            <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-primary"
+                style="font-size: 24px;"></i> Comprehensive background checks</li>
+            <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-primary"
+                style="font-size: 24px;"></i> Verified academic credentials</li>
+            <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-primary"
+                style="font-size: 24px;"></i> Mandatory personal interviews</li>
+            <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-primary"
+                style="font-size: 24px;"></i> Continuous performance monitoring</li>
+          </ul>
+          <a href="about.html" class="btn btn-outline mt-6">Read About Our Vetting</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">What Parents Say</h2>
+          <p class="section-subtitle">Real experiences from families using Tutorly.</p>
+        </div>
+        <div class="grid-3">
+          <div class="card" style="text-align: left; align-items: flex-start;">
+            <div class="d-flex gap-2 text-warning mb-4">
+              <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+            </div>
+            <p class="text-muted mb-6">"Finding a math tutor for my son used to be stressful. Tutorly's verified badges
+              and transparent reviews gave me confidence. His grades have improved tremendously!"</p>
+            <div class="d-flex align-center gap-4">
+              <img src="assets/images/testimonial-jennifer-d.jpg" alt="Jennifer D."
+                style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+              <div>
+                <h4 style="font-size: 16px;">Jennifer D.</h4>
+                <p class="text-muted" style="font-size: 12px;">Parent of 8th Grader</p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="text-align: left; align-items: flex-start;">
+            <div class="d-flex gap-2 text-warning mb-4">
+              <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+            </div>
+            <p class="text-muted mb-6">"The progress notes after every session are incredible. I finally know exactly
+              what my daughter is working on and where she needs more support."</p>
+            <div class="d-flex align-center gap-4">
+              <img src="assets/images/testimonial-michael-k.jpg" alt="Michael K."
+                style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+              <div>
+                <h4 style="font-size: 16px;">Michael K.</h4>
+                <p class="text-muted" style="font-size: 12px;">Parent of High School Junior</p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="text-align: left; align-items: flex-start;">
+            <div class="d-flex gap-2 text-warning mb-4">
+              <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
+                class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+            </div>
+            <p class="text-muted mb-6">"We love our tutor! The scheduling through the parent dashboard is seamless. No
+              more back-and-forth texting to find a time that works."</p>
+            <div class="d-flex align-center gap-4">
+              <img src="assets/images/testimonial-sarah-l.jpg" alt="Sarah L."
+                style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+              <div>
+                <h4 style="font-size: 16px;">Sarah L.</h4>
+                <p class="text-muted" style="font-size: 12px;">Parent of 4th Grader</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- CTA -->
+    <section class="py-16 text-center cta-band">
+      <div class="container">
+        <h2 class="section-title" style="color: white;">Ready to boost your child's confidence?</h2>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.8); margin-bottom: var(--spacing-8);">Join
+          thousands of parents who trust Tutorly for their children's educational success.</p>
+        <a href="find-tutor.html" class="btn btn-accent" style="font-size: 18px; padding: 16px 32px;">Find Your Child's
+          Tutor Today</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <i class="ph ph-student"></i> Tutorly
+          </a>
+          <p>The premium home tutoring booking platform connecting parents with thoroughly vetted, expert educators.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="ph ph-facebook-logo"></i></a>
+            <a href="#" class="social-link"><i class="ph ph-x-logo"></i></a>
+            <a href="#" class="social-link"><i class="ph ph-instagram-logo"></i></a>
+            <a href="#" class="social-link"><i class="ph ph-linkedin-logo"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Platform</h4>
+          <div class="footer-links">
+            <a href="find-tutor.html">Find a Tutor</a>
+            <a href="subjects.html">Subjects & Services</a>
+            <a href="how-it-works.html">How It Works</a>
+            <a href="pricing.html">Pricing Plans</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Company</h4>
+          <div class="footer-links">
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Support</a>
+            <a href="#">Trust & Safety</a>
+            <a href="#">Become a Tutor</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Legal</h4>
+          <div class="footer-links">
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Cancellation Policy</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Tutorly Platform. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorly | Contact Us</title>
+  <meta name="description" content="Get in touch with the Tutorly support team.">
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link id="rtl-stylesheet" rel="stylesheet" href="assets/css/rtl.css" disabled>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="logo">
+        <i class="ph ph-student"></i> Tutorly
+      </a>
+      
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="home2.html" class="nav-link">Home 2</a>
+        <a href="find-tutor.html" class="nav-link">Find a Tutor</a>
+        <a href="subjects.html" class="nav-link">Subjects</a>
+        <a href="how-it-works.html" class="nav-link">How It Works</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="rtl-toggle" aria-label="Toggle RTL" title="Toggle RTL">
+          <i class="ph ph-arrows-left-right"></i>
+        </button>
+        <button class="theme-toggle" aria-label="Toggle Theme" title="Toggle Theme">
+          <i class="ph ph-moon"></i>
+        </button>
+        <a href="login.html" class="btn btn-primary d-none d-lg-flex">Login</a>
+        <button class="mobile-menu-btn">
+          <i class="ph ph-list"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer-overlay"></div>
+  <aside class="mobile-drawer">
+    <div class="drawer-header">
+      <a href="index.html" class="logo">
+        <i class="ph ph-student"></i> Tutorly
+      </a>
+      <button class="close-drawer">
+        <i class="ph ph-x"></i>
+      </button>
+    </div>
+    <nav class="drawer-nav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="home2.html" class="nav-link">Home 2</a>
+      <a href="find-tutor.html" class="nav-link">Find a Tutor</a>
+      <a href="subjects.html" class="nav-link">Subjects</a>
+      <a href="how-it-works.html" class="nav-link">How It Works</a>
+      <a href="contact.html" class="nav-link active">Contact</a>
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+    </nav>
+    <div class="drawer-actions">
+      <a href="login.html" class="btn btn-primary">Login</a>
+      <div class="drawer-toggles">
+        <button class="rtl-toggle btn btn-outline" aria-label="Toggle RTL" style="flex: 1;">
+          <i class="ph ph-arrows-left-right"></i> RTL
+        </button>
+        <button class="theme-toggle btn btn-outline" aria-label="Toggle Theme" style="flex: 1;">
+          <i class="ph ph-moon"></i> Theme
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Page Header -->
+  <div class="page-header pt-16 pb-8 text-center" style="margin-top: 80px;">
+    <div class="container">
+      <h1 class="section-title mb-2">Get in Touch</h1>
+      <p class="section-subtitle">We're here to help you find the best educational support for your family.</p>
+    </div>
+  </div>
+
+  <main>
+    <section class="py-16">
+      <div class="container">
+        <div class="grid-2 align-start">
+
+          <!-- Contact Form -->
+          <div class="card" style="text-align: left; align-items: flex-start; padding: var(--spacing-8);">
+            <h3 class="mb-6">Send a Message</h3>
+            <form action="#" style="width: 100%;">
+              <div class="form-group">
+                <label class="form-label" for="name">Full Name</label>
+                <input type="text" id="name" class="form-control" placeholder="Jane Doe" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">Email Address</label>
+                <input type="email" id="email" class="form-control" placeholder="jane@example.com" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="subject">Subject</label>
+                <select id="subject" class="form-control" required>
+                  <option value="">Select a topic</option>
+                  <option value="billing">Billing Inquiry</option>
+                  <option value="tutor">Questions about a Tutor</option>
+                  <option value="technical">Technical Support</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="message">Message</label>
+                <textarea id="message" class="form-control" placeholder="How can we help you?" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary w-100" style="width: 100%; margin-top: var(--spacing-4);">Send Message</button>
+            </form>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="contact-info">
+            <h2 class="mb-6">Contact Information</h2>
+            <p class="text-muted mb-8">Our support team is available Monday through Friday, 8am to 8pm EST. We aim to
+              respond to all inquiries within 24 hours.</p>
+
+            <div class="contact-details">
+              <div class="contact-detail">
+                <div class="contact-icon"><i class="ph ph-envelope-simple"></i></div>
+                <div>
+                  <h4>Email Us</h4>
+                  <a href="mailto:support@tutorly.com" class="text-muted">support@tutorly.com</a>
+                </div>
+              </div>
+
+              <div class="contact-detail">
+                <div class="contact-icon"><i class="ph ph-phone"></i></div>
+                <div>
+                  <h4>Call Us</h4>
+                  <a href="tel:+18005550199" class="text-muted">1-800-555-0199</a>
+                </div>
+              </div>
+
+              <div class="contact-detail">
+                <div class="contact-icon"><i class="ph ph-map-pin"></i></div>
+                <div>
+                  <h4>Headquarters</h4>
+                  <p class="text-muted">123 Education Way, Suite 400<br>Boston, MA 02110</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8">
+              <h4 class="mb-4">Follow Us</h4>
+              <div class="social-links social-links-light">
+                <a href="#" class="social-link" aria-label="Tutorly on Facebook"><i class="ph ph-facebook-logo"></i></a>
+                <a href="#" class="social-link" aria-label="Tutorly on X"><i class="ph ph-x-logo"></i></a>
+                <a href="#" class="social-link" aria-label="Tutorly on Instagram"><i
+                    class="ph ph-instagram-logo"></i></a>
+                <a href="#" class="social-link" aria-label="Tutorly on LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+                <a href="#" class="social-link" aria-label="Tutorly on YouTube"><i class="ph ph-youtube-logo"></i></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Map -->
+    <section class="py-16 band-alt">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Find Our Office</h2>
+          <p class="section-subtitle">Our headquarters sits in Boston's Financial District, a short walk from South
+            Station.</p>
+        </div>
+
+        <div class="contact-map">
+          <iframe
+            src="https://maps.google.com/maps?q=123%20Education%20Way%2C%20Boston%2C%20MA%2002110&z=15&output=embed"
+            title="Map showing the Tutorly office at 123 Education Way, Boston, MA 02110" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+
+        <p class="contact-map-note">
+          <i class="ph ph-map-pin"></i> 123 Education Way, Suite 400, Boston, MA 02110 &middot;
+          <a href="https://maps.google.com/maps?q=123+Education+Way,+Boston,+MA+02110" target="_blank"
+            rel="noopener noreferrer" class="text-primary">Get directions</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <i class="ph ph-student"></i> Tutorly
+          </a>
+          <p>The premium home tutoring booking platform connecting parents with thoroughly vetted, expert educators.</p>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Tutorly on Facebook"><i class="ph ph-facebook-logo"></i></a>
+            <a href="#" class="social-link" aria-label="Tutorly on X"><i class="ph ph-x-logo"></i></a>
+            <a href="#" class="social-link" aria-label="Tutorly on Instagram"><i class="ph ph-instagram-logo"></i></a>
+            <a href="#" class="social-link" aria-label="Tutorly on LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Platform</h4>
+          <div class="footer-links">
+            <a href="find-tutor.html">Find a Tutor</a>
+            <a href="subjects.html">Subjects & Services</a>
+            <a href="how-it-works.html">How It Works</a>
+            <a href="pricing.html">Pricing Plans</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Company</h4>
+          <div class="footer-links">
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Support</a>
+            <a href="#">Trust & Safety</a>
+            <a href="#">Become a Tutor</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Legal</h4>
+          <div class="footer-links">
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Cancellation Policy</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Tutorly Platform. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

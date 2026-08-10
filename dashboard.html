@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorly | Parent Dashboard</title>
+  <meta name="description" content="Manage your child's tutoring sessions, track progress, and handle billing.">
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link id="rtl-stylesheet" rel="stylesheet" href="assets/css/rtl.css" disabled>
+
+  <style>
+    /* ---------------------------------------------------------------
+       Dashboard interaction layer.
+       Base component styling (stat cards, tables, progress notes, tab
+       switching) lives in assets/css/style.css — this block only adds
+       the dashboard-only pieces and their hover / focus feedback.
+       --------------------------------------------------------------- */
+
+    /* Header — profile chip */
+    .profile-chip { cursor: pointer; }
+    .profile-chip img {
+      transition: transform 0.4s var(--ease-out), box-shadow 0.3s ease;
+    }
+    .profile-chip span { transition: color 0.3s ease; }
+    .profile-chip:hover img {
+      transform: scale(1.06);
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.22);
+    }
+    .profile-chip:hover span { color: var(--color-primary); }
+
+    /* Header — sidebar toggle (mobile) */
+    .dashboard-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background-color: transparent;
+      border: 1px solid transparent;
+      color: var(--color-heading);
+      font-size: 22px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .dashboard-toggle:hover {
+      background-color: var(--color-secondary);
+      border-color: var(--color-border);
+      color: var(--color-primary);
+    }
+
+    /* Sidebar */
+    .sidebar-link i { transition: transform 0.35s var(--ease-out); }
+    .sidebar-link:hover i { transform: translateX(2px) scale(1.08); }
+    html[dir="rtl"] .sidebar-link:hover i { transform: translateX(-2px) scale(1.08); }
+    .sidebar-link .badge { transition: transform 0.35s var(--ease-out); }
+    .sidebar-link:hover .badge { transform: scale(1.09); }
+    .sidebar-link[href="login.html"]:hover {
+      background-image: linear-gradient(90deg, rgba(224, 82, 75, 0.12), transparent);
+      border-left-color: var(--color-error);
+    }
+    html[dir="rtl"] .sidebar-link[href="login.html"]:hover {
+      background-image: linear-gradient(270deg, rgba(224, 82, 75, 0.12), transparent);
+      border-right-color: var(--color-error);
+    }
+
+    /* Stat cards — icon reacts with the card */
+    .stat-card .stat-icon {
+      transition: transform 0.45s var(--ease-out), box-shadow 0.35s ease,
+                  background-image 0.35s ease, color 0.35s ease;
+    }
+    .stat-card:hover .stat-icon {
+      transform: translateY(-2px) scale(1.06);
+      background-image: var(--gradient-primary);
+      color: #fff;
+      box-shadow: var(--shadow-primary);
+    }
+    .stat-icon-accent {
+      color: var(--color-warning);
+      background-color: rgba(200, 155, 60, 0.12);
+      background-image: linear-gradient(150deg, rgba(200, 155, 60, 0.20), rgba(200, 155, 60, 0.06));
+    }
+    .stat-card:hover .stat-icon-accent {
+      background-image: var(--gradient-accent);
+      color: var(--color-accent-ink);
+      box-shadow: var(--shadow-accent);
+    }
+
+    /* Next-up session row */
+    .session-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-4);
+      padding: var(--spacing-4);
+      border-radius: var(--border-radius);
+      background-color: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-left: 4px solid var(--color-primary);
+      transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out),
+                  background-color 0.3s ease, border-color 0.3s ease;
+    }
+    html[dir="rtl"] .session-row {
+      border-left: 1px solid var(--color-border);
+      border-right: 4px solid var(--color-primary);
+    }
+    .session-row:hover {
+      transform: translateX(4px);
+      background-color: var(--color-bg-alt);
+      border-color: rgba(13, 148, 136, 0.3);
+      border-left-color: var(--color-primary);
+      box-shadow: var(--shadow-md);
+    }
+    html[dir="rtl"] .session-row:hover {
+      transform: translateX(-4px);
+      border-right-color: var(--color-primary);
+    }
+
+    /* Progress note */
+    .progress-note {
+      transition: transform 0.35s var(--ease-out), box-shadow 0.35s ease, border-color 0.3s ease;
+    }
+    .progress-note:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(13, 148, 136, 0.35);
+    }
+
+    /* .card centres its children by default — these panels need full width */
+    #tab-messages > .card,
+    #tab-bookings > .card { align-items: stretch; }
+
+    /* Messages — chat list */
+    .chat-item {
+      display: flex;
+      gap: var(--spacing-3);
+      padding: var(--spacing-4);
+      border-bottom: 1px solid var(--color-border);
+      border-left: 3px solid transparent;
+      cursor: pointer;
+      transition: background-color 0.28s ease, border-color 0.28s ease;
+    }
+    html[dir="rtl"] .chat-item {
+      border-left: none;
+      border-right: 3px solid transparent;
+    }
+    .chat-item img { transition: transform 0.4s var(--ease-out); }
+    .chat-item:hover img { transform: scale(1.06); }
+    .chat-item.active {
+      background-color: var(--color-bg);
+      border-left-color: var(--color-primary);
+    }
+    html[dir="rtl"] .chat-item.active { border-right-color: var(--color-primary); }
+    .chat-item:hover, .chat-item.active:hover { background-color: var(--color-secondary); }
+
+    /* Billing — saved payment method */
+    .payment-method {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-4);
+      padding: 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius);
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .payment-method:hover {
+      background-color: var(--color-surface-2);
+      border-color: rgba(13, 148, 136, 0.35);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Bookings — calendar placeholder */
+    .calendar-placeholder {
+      width: 100%;
+      height: 400px;
+      background-color: var(--color-bg);
+      border-radius: var(--border-radius);
+      border: 1px dashed var(--color-border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+    .calendar-placeholder i {
+      color: var(--color-text-muted);
+      transition: transform 0.45s var(--ease-out), color 0.3s ease;
+    }
+    .calendar-placeholder:hover {
+      background-color: var(--color-surface-2);
+      border-color: rgba(13, 148, 136, 0.4);
+    }
+    .calendar-placeholder:hover i {
+      transform: translateY(-3px);
+      color: var(--color-primary);
+    }
+
+    /* Subject chips */
+    .dashboard-main .badge-subject {
+      transition: transform 0.3s var(--ease-out), border-color 0.3s ease, background-color 0.3s ease;
+    }
+    .dashboard-main .badge-subject:hover {
+      transform: translateY(-2px);
+      border-color: rgba(13, 148, 136, 0.45);
+    }
+
+    /* Inline text links */
+    .dashboard-main a.text-primary:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Settings — checkbox rows */
+    #tab-settings input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--color-primary);
+      cursor: pointer;
+    }
+    #tab-settings .form-group label { transition: color 0.25s ease; }
+    #tab-settings .form-group label:hover { color: var(--color-primary); }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container navbar" style="max-width: 100%; padding: 0 var(--spacing-6);">
+      <div class="d-flex align-center gap-4">
+        <button class="dashboard-toggle d-lg-none" aria-label="Toggle sidebar">
+          <i class="ph ph-list"></i>
+        </button>
+        <a href="index.html" class="logo">
+          <i class="ph ph-student"></i> Tutorly
+        </a>
+      </div>
+      
+      <div class="nav-actions">
+        <button class="rtl-toggle" aria-label="Toggle RTL" title="Toggle RTL">
+          <i class="ph ph-arrows-left-right"></i>
+        </button>
+        <button class="theme-toggle" aria-label="Toggle Theme" title="Toggle Theme">
+          <i class="ph ph-moon"></i>
+        </button>
+        <div class="profile-chip d-flex align-center gap-2" style="border-left: 1px solid var(--color-border); padding-left: var(--spacing-4); margin-left: var(--spacing-2);">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=100" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+          <span class="d-none d-md-block font-weight-500">Jennifer D.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+    
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div style="padding: 0 var(--spacing-6) var(--spacing-4);">
+        <p class="text-muted" style="font-size: 12px; text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">Parent Portal</p>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="sidebar-link active" data-tab="overview">
+          <i class="ph ph-squares-four"></i> Overview
+        </a>
+        <a href="#" class="sidebar-link" data-tab="browse">
+          <i class="ph ph-magnifying-glass"></i> Browse Tutors
+        </a>
+        <a href="#" class="sidebar-link" data-tab="bookings">
+          <i class="ph ph-calendar-blank"></i> My Bookings
+        </a>
+        <a href="#" class="sidebar-link" data-tab="history">
+          <i class="ph ph-clock-counter-clockwise"></i> Lesson History
+        </a>
+        <a href="#" class="sidebar-link" data-tab="billing">
+          <i class="ph ph-credit-card"></i> Payments & Billing
+        </a>
+        <a href="#" class="sidebar-link" data-tab="messages">
+          <i class="ph ph-chat-circle"></i> Messages <span class="badge" style="background: var(--color-accent); color: white; margin-left: auto;">2</span>
+        </a>
+        <a href="#" class="sidebar-link" data-tab="children">
+          <i class="ph ph-users"></i> My Children
+        </a>
+        <a href="#" class="sidebar-link" data-tab="settings">
+          <i class="ph ph-gear"></i> Settings
+        </a>
+        <a href="login.html" class="sidebar-link mt-8" style="color: var(--color-error);">
+          <i class="ph ph-sign-out"></i> Logout
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <div style="max-width: 1000px; margin: 0 auto;">
+        
+        <!-- Overview Tab -->
+        <div id="tab-overview" class="dashboard-tab-content active">
+          <h2 class="mb-2">Welcome back, Jennifer!</h2>
+          <p class="text-muted mb-8">Here's a quick overview of your children's learning progress.</p>
+          
+          <div class="grid-4 mb-8" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-4);">
+            <div class="stat-card">
+              <div class="stat-icon"><i class="ph ph-calendar-check"></i></div>
+              <div>
+                <div class="stat-value">3</div>
+                <div class="stat-label">Upcoming Sessions</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="ph ph-chalkboard-teacher"></i></div>
+              <div>
+                <div class="stat-value">2</div>
+                <div class="stat-label">Active Tutors</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="ph ph-clock"></i></div>
+              <div>
+                <div class="stat-value">12</div>
+                <div class="stat-label">Hours This Month</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon stat-icon-accent"><i class="ph ph-credit-card"></i></div>
+              <div>
+                <div class="stat-value">4</div>
+                <div class="stat-label">Package Hrs Left</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2 align-start">
+            <div class="card" style="padding: var(--spacing-6); text-align: left; align-items: stretch;">
+              <div class="d-flex justify-between align-center mb-6">
+                <h3 style="margin: 0;">Next Up</h3>
+                <a href="#" class="text-primary" style="font-size: 14px;">View Calendar</a>
+              </div>
+              
+              <div class="session-row">
+                <div class="d-flex align-center gap-4">
+                  <div style="text-align: center; min-width: 60px;">
+                    <div style="font-weight: 700; color: var(--color-primary);">OCT</div>
+                    <div style="font-size: 24px; font-weight: 700; line-height: 1;">12</div>
+                  </div>
+                  <div>
+                    <h4 style="margin-bottom: 2px;">Algebra I with Sarah J.</h4>
+                    <p class="text-muted" style="font-size: 14px;"><i class="ph ph-clock"></i> 4:00 PM - 5:00 PM &bull; Online</p>
+                    <p class="text-muted" style="font-size: 12px; margin-top: 4px;">Student: Ethan D.</p>
+                  </div>
+                </div>
+                <button class="btn btn-primary" style="padding: 8px 16px;">Join Video</button>
+              </div>
+            </div>
+            
+            <div class="card" style="padding: var(--spacing-6); text-align: left; align-items: stretch;">
+              <h3 class="mb-4">Recent Progress Note</h3>
+              <div class="progress-note" style="background: var(--color-secondary);">
+                <div class="d-flex justify-between mb-2">
+                  <span class="font-weight-500">AP Physics (David M.)</span>
+                  <span class="text-muted" style="font-size: 12px;">Oct 10, 2026</span>
+                </div>
+                <p style="font-size: 14px; color: var(--color-heading);">"Chloe did an excellent job grasping the concepts of kinematics today. We worked through 5 practice problems. She struggled slightly with vector components, so I've assigned two supplementary worksheets focusing on that for our next session."</p>
+              </div>
+              <a href="#" class="btn btn-outline w-100 mt-4" style="width: 100%;">Read All Notes</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Browse Tutors Tab -->
+        <div id="tab-browse" class="dashboard-tab-content">
+          <h2 class="mb-6">Browse Tutors</h2>
+          <div class="filter-bar mb-8" style="max-width: 100%; border-radius: var(--border-radius); box-shadow: none;">
+            <div class="filter-item text-left">
+              <select class="filter-select">
+                <option value="">Subject (All)</option>
+                <option value="math">Mathematics</option>
+                <option value="science">Science</option>
+              </select>
+            </div>
+            <div class="filter-item text-left">
+              <select class="filter-select">
+                <option value="">Grade Level (All)</option>
+                <option value="middle">Middle School</option>
+                <option value="high">High School</option>
+              </select>
+            </div>
+            <div class="filter-item text-left">
+              <select class="filter-select">
+                <option value="">Availability</option>
+                <option value="weekdays">Weekdays</option>
+              </select>
+            </div>
+            <div style="padding: 4px;">
+              <button class="btn btn-primary">Filter</button>
+            </div>
+          </div>
+          <div class="grid-3">
+             <!-- Placeholder tutor card, same as find-tutor -->
+             <div class="card tutor-card">
+              <div class="tutor-img-wrap" style="height: 180px;">
+                <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=800" alt="Michael T." class="tutor-img">
+              </div>
+              <div class="tutor-content">
+                <div class="tutor-header">
+                  <div>
+                    <h3 class="tutor-name">Michael T.</h3>
+                    <div class="tutor-rate">$35/hr</div>
+                  </div>
+                  <div class="badge badge-rating"><i class="ph-fill ph-star"></i> 4.7</div>
+                </div>
+                <div class="tutor-badges mb-2">
+                  <span class="badge badge-verified"><i class="ph ph-shield-check"></i> Verified</span>
+                  <span class="badge badge-subject">English</span>
+                </div>
+                <button class="btn btn-primary w-100" style="width: 100%; padding: 8px;">Book Lesson</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bookings Tab (Calendar placeholder) -->
+        <div id="tab-bookings" class="dashboard-tab-content">
+          <div class="d-flex justify-between align-center mb-6">
+            <h2 style="margin: 0;">My Bookings</h2>
+            <button class="btn btn-primary"><i class="ph ph-plus"></i> New Booking</button>
+          </div>
+          
+          <!-- Calendar Placeholder UI -->
+          <div class="card" style="padding: var(--spacing-6); text-align: left;">
+            <div class="d-flex justify-between align-center mb-6">
+              <h3 style="margin:0;">October 2026</h3>
+              <div class="d-flex gap-2">
+                <button class="btn btn-outline" style="padding: 4px 12px;"><i class="ph ph-caret-left"></i></button>
+                <button class="btn btn-outline" style="padding: 4px 12px;"><i class="ph ph-caret-right"></i></button>
+              </div>
+            </div>
+            <div class="calendar-placeholder">
+              <i class="ph ph-calendar-blank" style="font-size: 48px; margin-bottom: 16px;"></i>
+              <p class="text-muted">Interactive Calendar / Time-slot picker placeholder.</p>
+              <p class="text-muted" style="font-size: 14px;">(Integrates with scheduling engine)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lesson History & Progress Notes -->
+        <div id="tab-history" class="dashboard-tab-content">
+          <h2 class="mb-6">Lesson History & Progress Notes</h2>
+          <div class="card" style="padding: 0; overflow: hidden;">
+            <div class="table-container">
+              <table class="dashboard-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Student</th>
+                    <th>Tutor & Subject</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Oct 10, 2026</td>
+                    <td>Chloe D.</td>
+                    <td>David M. (AP Physics)</td>
+                    <td><span class="badge" style="background: rgba(16, 185, 129, 0.1); color: var(--color-success);">Completed</span></td>
+                    <td><button class="btn btn-outline" style="padding: 4px 12px; font-size: 12px;">View Note</button></td>
+                  </tr>
+                  <!-- Expanded Note Example -->
+                  <tr style="background: rgba(13, 148, 136, 0.05);">
+                    <td colspan="5" style="padding: var(--spacing-4);">
+                      <h4 style="font-size: 14px; margin-bottom: 8px;">Progress Note from David M:</h4>
+                      <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: 8px;">"Chloe did an excellent job grasping the concepts of kinematics today. We worked through 5 practice problems. She struggled slightly with vector components, so I've assigned two supplementary worksheets focusing on that for our next session."</p>
+                      <div class="d-flex gap-2">
+                        <span class="badge" style="background: var(--color-bg-alt); border: 1px solid var(--color-border);">Topics: Kinematics, Vectors</span>
+                        <span class="badge" style="background: var(--color-bg-alt); border: 1px solid var(--color-border);">Homework: Assigned</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Oct 08, 2026</td>
+                    <td>Ethan D.</td>
+                    <td>Sarah J. (Algebra I)</td>
+                    <td><span class="badge" style="background: rgba(16, 185, 129, 0.1); color: var(--color-success);">Completed</span></td>
+                    <td><button class="btn btn-outline" style="padding: 4px 12px; font-size: 12px;">View Note</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payments & Billing -->
+        <div id="tab-billing" class="dashboard-tab-content">
+          <h2 class="mb-6">Payments & Billing</h2>
+          
+          <div class="grid-2 align-start mb-8">
+            <div class="card" style="padding: var(--spacing-6); text-align: left; align-items: stretch;">
+              <h3 class="mb-4">Lesson Package Balance</h3>
+              <div style="font-size: 36px; font-weight: 700; color: var(--color-primary); line-height: 1; margin-bottom: 8px;">4 <span style="font-size: 16px; font-weight: 400; color: var(--color-text-muted);">hours remaining</span></div>
+              <p class="text-muted" style="font-size: 14px; margin-bottom: 16px;">From: 10-Hour Bundle. Good for any subject.</p>
+              
+              <!-- Stripe Placeholder -->
+              <button class="btn btn-primary w-100" style="width: 100%;"><i class="ph ph-credit-card"></i> Buy More Hours</button>
+            </div>
+            
+            <div class="card" style="padding: var(--spacing-6); text-align: left; align-items: stretch;">
+              <h3 class="mb-4">Payment Method</h3>
+              <div class="payment-method">
+                <div style="font-size: 24px; color: var(--color-heading);"><i class="ph ph-stripe-logo"></i></div>
+                <div>
+                  <div style="font-weight: 500;">Visa ending in 4242</div>
+                  <div class="text-muted" style="font-size: 12px;">Expires 12/28</div>
+                </div>
+                <button class="btn btn-outline" style="margin-left: auto; padding: 4px 12px; font-size: 12px;">Edit</button>
+              </div>
+            </div>
+          </div>
+          
+          <h3 class="mb-4">Transaction History</h3>
+          <div class="card" style="padding: 0; overflow: hidden;">
+            <div class="table-container">
+              <table class="dashboard-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Receipt</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Sep 15, 2026</td>
+                    <td>10-Hour Lesson Bundle</td>
+                    <td>$450.00</td>
+                    <td><a href="#" class="text-primary"><i class="ph ph-download-simple"></i> PDF</a></td>
+                  </tr>
+                  <tr>
+                    <td>Aug 10, 2026</td>
+                    <td>Single Session (Pay As You Go)</td>
+                    <td>$50.00</td>
+                    <td><a href="#" class="text-primary"><i class="ph ph-download-simple"></i> PDF</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Messages -->
+        <div id="tab-messages" class="dashboard-tab-content">
+          <h2 class="mb-6">Messages</h2>
+          <div class="card" style="padding: 0; display: flex; flex-direction: row; height: 600px; overflow: hidden;">
+            <!-- Chat List -->
+            <div style="width: 300px; border-right: 1px solid var(--color-border); display: flex; flex-direction: column;">
+              <div style="padding: var(--spacing-4); border-bottom: 1px solid var(--color-border);">
+                <input type="text" class="form-control" placeholder="Search chats...">
+              </div>
+              <div style="flex: 1; overflow-y: auto;">
+                <div class="chat-item active">
+                  <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=100" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+                  <div style="flex: 1;">
+                    <div class="d-flex justify-between">
+                      <span style="font-weight: 600;">Sarah J.</span>
+                      <span class="text-muted" style="font-size: 12px;">10:42 AM</span>
+                    </div>
+                    <p class="text-muted" style="font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">Ethan is doing great with the new material.</p>
+                  </div>
+                </div>
+                <!-- Chat Item -->
+                <div class="chat-item">
+                  <div style="position: relative;">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=100" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+                    <span style="position: absolute; top: 0; right: 0; width: 12px; height: 12px; background: var(--color-accent); border-radius: 50%; border: 2px solid white;"></span>
+                  </div>
+                  <div style="flex: 1;">
+                    <div class="d-flex justify-between">
+                      <span style="font-weight: 600;">David M.</span>
+                      <span class="text-muted" style="font-size: 12px;">Yesterday</span>
+                    </div>
+                    <p style="font-weight: 600; color: var(--color-heading); font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">Could we push tomorrow's session by 15 mins?</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Chat Window -->
+            <div style="flex: 1; display: flex; flex-direction: column; background: var(--color-bg);">
+              <div style="padding: var(--spacing-4); border-bottom: 1px solid var(--color-border); background: var(--color-bg-alt); display: flex; align-items: center; gap: var(--spacing-3);">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=100" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                <div>
+                  <div style="font-weight: 600;">Sarah J. (Math Tutor)</div>
+                  <div class="text-muted" style="font-size: 12px;">Online</div>
+                </div>
+              </div>
+              <div style="flex: 1; padding: var(--spacing-4); overflow-y: auto; display: flex; flex-direction: column; gap: var(--spacing-4);">
+                <!-- MSG -->
+                <div style="align-self: flex-start; max-width: 70%;">
+                  <div style="background: var(--color-bg-alt); border: 1px solid var(--color-border); padding: 12px 16px; border-radius: 16px; border-top-left-radius: 4px;">
+                    Hi Jennifer! Ethan is doing great with the new material. I've attached the worksheet for next week.
+                  </div>
+                  <div class="text-muted mt-1" style="font-size: 11px;">10:42 AM</div>
+                </div>
+                <!-- MSG -->
+                <div style="align-self: flex-end; max-width: 70%;">
+                  <div style="background: var(--color-primary); color: white; padding: 12px 16px; border-radius: 16px; border-top-right-radius: 4px;">
+                    That's wonderful to hear, Sarah. Thank you! I'll make sure he prints it out.
+                  </div>
+                  <div class="text-muted mt-1 text-right" style="font-size: 11px;">11:05 AM</div>
+                </div>
+              </div>
+              <div style="padding: var(--spacing-4); border-top: 1px solid var(--color-border); background: var(--color-bg-alt); display: flex; gap: var(--spacing-2);">
+                <input type="text" class="form-control" style="flex: 1; margin: 0; border-radius: var(--border-radius-full);" placeholder="Type a message...">
+                <button class="btn btn-primary" style="border-radius: 50%; width: 48px; height: 48px; padding: 0;"><i class="ph ph-paper-plane-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- My Children -->
+        <div id="tab-children" class="dashboard-tab-content">
+          <div class="d-flex justify-between align-center mb-6">
+            <h2 style="margin: 0;">My Children</h2>
+            <button class="btn btn-primary"><i class="ph ph-plus"></i> Add Child</button>
+          </div>
+          
+          <div class="grid-2">
+            <div class="card" style="padding: var(--spacing-6); text-align: left; align-items: stretch;">
+              <div class="d-flex justify-between mb-4">
+                <div class="d-flex align-center gap-4">
+                  <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--color-secondary); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700;">ED</div>
+                  <div>
+                    <h3 style="margin: 0;">Ethan D.</h3>
+                    <p class="text-muted">8th Grade</p>
+                  </div>
+                </div>
+                <button class="btn btn-outline" style="padding: 4px 12px; height: fit-content;">Edit</button>
+              </div>
+              <div class="mt-4">
+                <h4 style="font-size: 14px; margin-bottom: 8px; color: var(--color-text-muted); text-transform: uppercase;">Subjects Needing Help</h4>
+                <div class="d-flex gap-2 flex-wrap">
+                  <span class="badge badge-subject">Algebra I</span>
+                  <span class="badge badge-subject">English</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="padding: var(--spacing-6); text-align: left; align-items: stretch;">
+              <div class="d-flex justify-between mb-4">
+                <div class="d-flex align-center gap-4">
+                  <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--color-accent); color: white; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700;">CD</div>
+                  <div>
+                    <h3 style="margin: 0;">Chloe D.</h3>
+                    <p class="text-muted">High School Junior (11th)</p>
+                  </div>
+                </div>
+                <button class="btn btn-outline" style="padding: 4px 12px; height: fit-content;">Edit</button>
+              </div>
+              <div class="mt-4">
+                <h4 style="font-size: 14px; margin-bottom: 8px; color: var(--color-text-muted); text-transform: uppercase;">Subjects Needing Help</h4>
+                <div class="d-flex gap-2 flex-wrap">
+                  <span class="badge badge-subject">AP Physics</span>
+                  <span class="badge badge-subject">SAT Prep</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings -->
+        <div id="tab-settings" class="dashboard-tab-content">
+          <h2 class="mb-6">Account Settings</h2>
+          <div class="card" style="text-align: left; align-items: stretch; max-width: 600px;">
+            <form action="#">
+              <h3 class="mb-4">Personal Information</h3>
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" value="Jennifer Doe">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-control" value="jennifer.d@example.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" value="(555) 123-4567">
+              </div>
+              
+              <h3 class="mb-4 mt-8">Notification Preferences</h3>
+              <div class="form-group">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                  <input type="checkbox" checked> Email me when a new progress note is added
+                </label>
+              </div>
+              <div class="form-group">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                  <input type="checkbox" checked> Send SMS reminders 24 hours before a session
+                </label>
+              </div>
+              <div class="form-group">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                  <input type="checkbox"> Email me promotional offers and news
+                </label>
+              </div>
+
+              <button type="submit" class="btn btn-primary mt-6">Save Changes</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Dashboard Tabs Logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const links = document.querySelectorAll('.sidebar-link[data-tab]');
+      const contents = document.querySelectorAll('.dashboard-tab-content');
+
+      links.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          // Remove active from all
+          links.forEach(l => l.classList.remove('active'));
+          contents.forEach(c => c.classList.remove('active'));
+          
+          // Add active to current
+          link.classList.add('active');
+          const tabId = link.getAttribute('data-tab');
+          document.getElementById('tab-' + tabId).classList.add('active');
+
+          // Close sidebar on mobile after clicking
+          const sidebar = document.querySelector('.dashboard-sidebar');
+          if(window.innerWidth <= 1024) {
+            sidebar.classList.remove('active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
