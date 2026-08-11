@@ -9,6 +9,9 @@
   <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+
   <!-- CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
   <link id="rtl-stylesheet" rel="stylesheet" href="assets/css/rtl.css" disabled>
@@ -21,17 +24,64 @@
        the dashboard-only pieces and their hover / focus feedback.
        --------------------------------------------------------------- */
 
-    /* Header — profile chip */
-    .profile-chip { cursor: pointer; }
-    .profile-chip img {
-      transition: transform 0.4s var(--ease-out), box-shadow 0.3s ease;
+    /* Header bar */
+    .dashboard-navbar {
+      max-width: 100%;
+      padding: 0 var(--spacing-6);
     }
-    .profile-chip span { transition: color 0.3s ease; }
-    .profile-chip:hover img {
-      transform: scale(1.06);
-      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.22);
+
+    /* The dashboard has no mobile drawer to hold the toggles, so unlike the
+       marketing pages they stay in the top bar at every width. */
+    @media (max-width: 1024px) {
+      .nav-actions .theme-toggle,
+      .nav-actions .rtl-toggle { display: inline-flex; }
     }
-    .profile-chip:hover span { color: var(--color-primary); }
+
+    /* Phones: tighten the bar so logo + four controls still fit at 360 */
+    @media (max-width: 480px) {
+      .dashboard-navbar { padding: 0 var(--spacing-4); }
+      .nav-actions { gap: 2px; }
+      .nav-actions .theme-toggle,
+      .nav-actions .rtl-toggle,
+      .profile-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 19px;
+      }
+      .dashboard-toggle {
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
+      }
+      .dashboard-navbar .logo { font-size: 20px; }
+      .dashboard-navbar .logo i { width: 34px; height: 34px; font-size: 19px; }
+    }
+
+    /* Header — profile button, sized to match the theme / RTL toggles */
+    .profile-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: none;
+      border: 1px solid transparent;
+      color: var(--color-heading);
+      font-size: 22px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .profile-btn:hover {
+      background-color: var(--color-secondary);
+      border-color: var(--color-border);
+      color: var(--color-primary);
+      transform: translateY(-1px);
+    }
+    .profile-btn:focus-visible {
+      outline: none;
+      box-shadow: var(--ring-primary);
+    }
 
     /* Header — sidebar toggle (mobile) */
     .dashboard-toggle {
@@ -60,11 +110,11 @@
     html[dir="rtl"] .sidebar-link:hover i { transform: translateX(-2px) scale(1.08); }
     .sidebar-link .badge { transition: transform 0.35s var(--ease-out); }
     .sidebar-link:hover .badge { transform: scale(1.09); }
-    .sidebar-link[href="login.html"]:hover {
+    .sidebar-link.logout-link:hover {
       background-image: linear-gradient(90deg, rgba(224, 82, 75, 0.12), transparent);
       border-left-color: var(--color-error);
     }
-    html[dir="rtl"] .sidebar-link[href="login.html"]:hover {
+    html[dir="rtl"] .sidebar-link.logout-link:hover {
       background-image: linear-gradient(270deg, rgba(224, 82, 75, 0.12), transparent);
       border-right-color: var(--color-error);
     }
@@ -91,11 +141,16 @@
       box-shadow: var(--shadow-accent);
     }
 
-    /* Next-up session row */
+    /* Next-up session row.
+       Wrapping is driven by the content, not a breakpoint: when the button no
+       longer fits beside the details it drops to its own full-width line. */
     .session-row {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      justify-content: space-between;
+      /* Centres the button once it wraps onto its own line; the first line is
+         unaffected because .session-info grows to fill it. */
+      justify-content: center;
       gap: var(--spacing-4);
       padding: var(--spacing-4);
       border-radius: var(--border-radius);
@@ -119,6 +174,128 @@
     html[dir="rtl"] .session-row:hover {
       transform: translateX(-4px);
       border-right-color: var(--color-primary);
+    }
+    .session-date {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      width: 58px;
+      padding: var(--spacing-2) 0;
+      border-radius: var(--border-radius-sm);
+      background-color: var(--color-secondary);
+      font-family: var(--font-heading);
+      line-height: 1;
+    }
+    .session-month {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--color-primary);
+    }
+    .session-day {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--color-heading);
+    }
+    .session-info {
+      flex: 1 1 190px;
+      min-width: 0;
+    }
+    .session-info h4 { margin-bottom: 2px; }
+    .session-info p { font-size: 14px; margin: 0; }
+    .session-info .session-student { font-size: 12px; margin-top: 4px; }
+    .session-action {
+      flex: 0 0 auto;
+      padding: 10px 20px;
+    }
+
+    /* My Children — centred cards with an icon avatar */
+    .child-card { padding: var(--spacing-6); }
+    .child-avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      margin-bottom: var(--spacing-3);
+      border-radius: 50%;
+      font-size: 34px;
+      color: var(--color-primary);
+      background-color: var(--color-secondary);
+      transition: transform 0.45s var(--ease-out), background-image 0.35s ease, color 0.3s ease;
+    }
+    .child-card:hover .child-avatar {
+      transform: scale(1.06);
+      background-image: var(--gradient-primary);
+      color: #fff;
+    }
+    .child-avatar-accent {
+      color: var(--color-warning);
+      background-color: rgba(200, 155, 60, 0.14);
+    }
+    .child-card:hover .child-avatar-accent {
+      background-image: var(--gradient-accent);
+      color: var(--color-accent-ink);
+    }
+    .child-name { margin: 0; }
+    .child-grade { margin: 4px 0 var(--spacing-5); }
+    .child-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-3);
+    }
+    .child-subjects {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--spacing-2);
+      margin-bottom: var(--spacing-5);
+    }
+    /* Auto margin keeps both Edit buttons on the same line */
+    .child-edit {
+      margin-top: auto;
+      padding: 8px 20px;
+    }
+
+    /* Lesson history — the selected progress note, below the table */
+    .note-card {
+      align-items: stretch;
+      text-align: left;
+      padding: var(--spacing-6);
+      border-left: 4px solid var(--color-primary);
+    }
+    html[dir="rtl"] .note-card {
+      border-left: 1px solid var(--color-border);
+      border-right: 4px solid var(--color-primary);
+    }
+    .note-card:hover { transform: none; }
+    .note-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-3);
+      margin-bottom: var(--spacing-4);
+      padding-bottom: var(--spacing-4);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .note-head h4 { margin-bottom: 2px; }
+    .note-head p { margin: 0; font-size: 13px; }
+    .note-body {
+      margin: 0 0 var(--spacing-4);
+      color: var(--color-text);
+      line-height: 1.7;
+    }
+    .note-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-2);
     }
 
     /* Progress note */
@@ -174,31 +351,230 @@
       box-shadow: var(--shadow-sm);
     }
 
-    /* Bookings — calendar placeholder */
-    .calendar-placeholder {
+    /* Mock Calendar System */
+    .calendar-wrapper {
       width: 100%;
-      height: 400px;
-      background-color: var(--color-bg);
       border-radius: var(--border-radius);
-      border: 1px dashed var(--color-border-strong);
+      overflow: hidden;
+      background-color: var(--color-bg-alt);
+    }
+    .calendar-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-4) var(--spacing-5);
+      border-bottom: 1px solid var(--color-border);
+      background-color: var(--color-surface-2);
+      flex-wrap: wrap;
+      gap: var(--spacing-3);
+    }
+    .calendar-view-toggle {
+      display: inline-flex;
+      background-color: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-sm);
+      padding: 3px;
+      gap: 2px;
+    }
+    .cal-btn {
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      border: none;
+      background: transparent;
+      color: var(--color-text-muted);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .cal-btn.active, .cal-btn:hover {
+      background-color: var(--color-bg-alt);
+      color: var(--color-primary);
+      box-shadow: var(--shadow-sm);
+    }
+    .calendar-legend {
       display: flex;
       align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      transition: background-color 0.3s ease, border-color 0.3s ease;
-    }
-    .calendar-placeholder i {
+      gap: var(--spacing-4);
+      font-size: 13px;
       color: var(--color-text-muted);
-      transition: transform 0.45s var(--ease-out), color 0.3s ease;
+      flex-wrap: wrap;
     }
-    .calendar-placeholder:hover {
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 4px;
+    }
+    .legend-confirmed { background-color: var(--color-primary); }
+    .legend-pending { background-color: var(--color-warning); }
+    .legend-completed { background-color: var(--color-text-muted); }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .calendar-day-header {
+      padding: var(--spacing-3) var(--spacing-2);
+      text-align: center;
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
       background-color: var(--color-surface-2);
-      border-color: rgba(13, 148, 136, 0.4);
+      border-bottom: 1px solid var(--color-border);
+      border-right: 1px solid var(--color-border);
     }
-    .calendar-placeholder:hover i {
-      transform: translateY(-3px);
-      color: var(--color-primary);
+    .calendar-day-header:last-child { border-right: none; }
+    .calendar-cell {
+      min-height: 96px;
+      padding: var(--spacing-2);
+      border-right: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      background-color: var(--color-bg-alt);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: background-color 0.2s ease;
+      cursor: pointer;
+      position: relative;
     }
+    .calendar-cell:nth-child(7n) { border-right: none; }
+    .calendar-cell:hover {
+      background-color: var(--color-secondary);
+    }
+    .calendar-cell.other-month {
+      background-color: var(--color-bg);
+      opacity: 0.45;
+    }
+    .calendar-cell.today {
+      background-color: rgba(13, 148, 136, 0.06);
+    }
+    .calendar-cell.today .day-number {
+      background-color: var(--color-primary);
+      color: white;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+    .day-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-heading);
+      margin-bottom: 2px;
+    }
+    .cal-event {
+      padding: 4px 6px;
+      border-radius: 6px;
+      font-size: 11px;
+      line-height: 1.3;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .cal-event:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+    .cal-event-primary {
+      background-color: var(--color-secondary);
+      color: var(--color-primary-hover);
+      border-left: 3px solid var(--color-primary);
+    }
+    [data-theme="dark"] .cal-event-primary {
+      background-color: rgba(13, 148, 136, 0.2);
+      color: #5EEAD4;
+    }
+    .cal-event-warning {
+      background-color: rgba(200, 155, 60, 0.15);
+      color: var(--color-warning);
+      border-left: 3px solid var(--color-warning);
+    }
+    .cal-event-completed {
+      background-color: rgba(116, 135, 133, 0.12);
+      color: var(--color-text-muted);
+      border-left: 3px solid var(--color-text-muted);
+    }
+
+    /* Selected Date Agenda Details */
+    .calendar-agenda {
+      padding: var(--spacing-4) var(--spacing-5);
+      background-color: var(--color-surface-2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-3);
+    }
+    .agenda-card {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-3);
+    }
+    .calendar-agenda-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 820px) {
+      .calendar-agenda {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: var(--spacing-3);
+      }
+      .agenda-card {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+      .calendar-agenda-actions {
+        width: 100%;
+        justify-content: center;
+      }
+      .calendar-topbar {
+        justify-content: center;
+        text-align: center;
+      }
+      .calendar-topbar > div {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .calendar-cell { min-height: 75px; padding: 4px; }
+      .cal-event { font-size: 10px; padding: 2px 4px; }
+      .day-number { font-size: 11px; }
+      .calendar-day-header { font-size: 11px; padding: var(--spacing-2) 0; }
+    }
+    @media (max-width: 480px) {
+      .calendar-cell { min-height: 52px; }
+      .cal-event span.event-title { display: none; }
+      .cal-event { width: 8px; height: 8px; border-radius: 50%; padding: 0; margin: 2px auto 0; }
+      .calendar-agenda-actions .btn {
+        flex: 1 1 auto;
+        min-width: 130px;
+      }
+    }
+
+    /* Browse tutors — taller frame and a crop biased to the upper body,
+       so heads are not clipped by the default centre crop. */
+    #tab-browse .tutor-img-wrap { height: 220px; }
+    #tab-browse .tutor-img { object-position: center 22%; }
 
     /* Subject chips */
     .dashboard-main .badge-subject {
@@ -207,6 +583,47 @@
     .dashboard-main .badge-subject:hover {
       transform: translateY(-2px);
       border-color: rgba(13, 148, 136, 0.45);
+    }
+
+    /* Messages — list beside the conversation */
+    .chat-layout {
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      height: 600px;
+      overflow: hidden;
+    }
+    .chat-list {
+      width: 300px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+    }
+    html[dir="rtl"] .chat-list {
+      border-right: none;
+      border-left: 1px solid var(--color-border);
+    }
+
+    /* Narrow screens: stack the conversation under a short chat list */
+    @media (max-width: 700px) {
+      .chat-layout {
+        flex-direction: column;
+        height: auto;
+      }
+      .chat-list {
+        width: 100%;
+        max-height: 260px;
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+      }
+      html[dir="rtl"] .chat-list { border-left: none; }
+    }
+
+    /* Once wrapped, the button spans the row rather than sitting orphaned */
+    @media (max-width: 600px) {
+      .session-action { flex: 1 1 100%; }
     }
 
     /* Inline text links */
@@ -230,7 +647,7 @@
 
   <!-- Header -->
   <header class="header">
-    <div class="container navbar" style="max-width: 100%; padding: 0 var(--spacing-6);">
+    <div class="container navbar dashboard-navbar">
       <div class="d-flex align-center gap-4">
         <button class="dashboard-toggle d-lg-none" aria-label="Toggle sidebar">
           <i class="ph ph-list"></i>
@@ -247,10 +664,9 @@
         <button class="theme-toggle" aria-label="Toggle Theme" title="Toggle Theme">
           <i class="ph ph-moon"></i>
         </button>
-        <div class="profile-chip d-flex align-center gap-2" style="border-left: 1px solid var(--color-border); padding-left: var(--spacing-4); margin-left: var(--spacing-2);">
-          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=100" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-          <span class="d-none d-md-block font-weight-500">Jennifer D.</span>
-        </div>
+        <button class="profile-btn" data-tab="settings" aria-label="Profile and settings" title="Profile">
+          <i class="ph ph-user-circle"></i>
+        </button>
       </div>
     </div>
   </header>
@@ -287,7 +703,7 @@
         <a href="#" class="sidebar-link" data-tab="settings">
           <i class="ph ph-gear"></i> Settings
         </a>
-        <a href="login.html" class="sidebar-link mt-8" style="color: var(--color-error);">
+        <a href="index.html" class="sidebar-link logout-link mt-8" style="color: var(--color-error);">
           <i class="ph ph-sign-out"></i> Logout
         </a>
       </nav>
@@ -341,18 +757,16 @@
               </div>
               
               <div class="session-row">
-                <div class="d-flex align-center gap-4">
-                  <div style="text-align: center; min-width: 60px;">
-                    <div style="font-weight: 700; color: var(--color-primary);">OCT</div>
-                    <div style="font-size: 24px; font-weight: 700; line-height: 1;">12</div>
-                  </div>
-                  <div>
-                    <h4 style="margin-bottom: 2px;">Algebra I with Sarah J.</h4>
-                    <p class="text-muted" style="font-size: 14px;"><i class="ph ph-clock"></i> 4:00 PM - 5:00 PM &bull; Online</p>
-                    <p class="text-muted" style="font-size: 12px; margin-top: 4px;">Student: Ethan D.</p>
-                  </div>
+                <div class="session-date">
+                  <span class="session-month">OCT</span>
+                  <span class="session-day">12</span>
                 </div>
-                <button class="btn btn-primary" style="padding: 8px 16px;">Join Video</button>
+                <div class="session-info">
+                  <h4>Algebra I with Sarah J.</h4>
+                  <p class="text-muted"><i class="ph ph-clock"></i> 4:00 PM - 5:00 PM &bull; Online</p>
+                  <p class="text-muted session-student">Student: Ethan D.</p>
+                </div>
+                <button class="btn btn-primary session-action">Join Video</button>
               </div>
             </div>
             
@@ -394,15 +808,15 @@
                 <option value="weekdays">Weekdays</option>
               </select>
             </div>
-            <div style="padding: 4px;">
+            <div style="padding: 4px; display: flex; align-items: center; justify-content: center;">
               <button class="btn btn-primary">Filter</button>
             </div>
           </div>
           <div class="grid-3">
              <!-- Placeholder tutor card, same as find-tutor -->
              <div class="card tutor-card">
-              <div class="tutor-img-wrap" style="height: 180px;">
-                <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=800" alt="Michael T." class="tutor-img">
+              <div class="tutor-img-wrap">
+                <img src="assets/images/listing-michael-t.jpg" alt="Michael T." class="tutor-img">
               </div>
               <div class="tutor-content">
                 <div class="tutor-header">
@@ -419,29 +833,242 @@
                 <button class="btn btn-primary w-100" style="width: 100%; padding: 8px;">Book Lesson</button>
               </div>
             </div>
+
+            <div class="card tutor-card">
+              <div class="tutor-img-wrap">
+                <img src="assets/images/listing-sarah-j.jpg" alt="Sarah J." class="tutor-img">
+              </div>
+              <div class="tutor-content">
+                <div class="tutor-header">
+                  <div>
+                    <h3 class="tutor-name">Sarah J.</h3>
+                    <div class="tutor-rate">$45/hr</div>
+                  </div>
+                  <div class="badge badge-rating"><i class="ph-fill ph-star"></i> 4.9</div>
+                </div>
+                <div class="tutor-badges mb-2">
+                  <span class="badge badge-verified"><i class="ph ph-shield-check"></i> Verified</span>
+                  <span class="badge badge-subject">Mathematics</span>
+                </div>
+                <button class="btn btn-primary w-100" style="width: 100%; padding: 8px;">Book Lesson</button>
+              </div>
+            </div>
+
+            <div class="card tutor-card">
+              <div class="tutor-img-wrap">
+                <img src="assets/images/listing-david-m.jpg" alt="David M." class="tutor-img">
+              </div>
+              <div class="tutor-content">
+                <div class="tutor-header">
+                  <div>
+                    <h3 class="tutor-name">David M.</h3>
+                    <div class="tutor-rate">$55/hr</div>
+                  </div>
+                  <div class="badge badge-rating"><i class="ph-fill ph-star"></i> 5.0</div>
+                </div>
+                <div class="tutor-badges mb-2">
+                  <span class="badge badge-verified"><i class="ph ph-shield-check"></i> Verified</span>
+                  <span class="badge badge-subject">Sciences</span>
+                </div>
+                <button class="btn btn-primary w-100" style="width: 100%; padding: 8px;">Book Lesson</button>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Bookings Tab (Calendar placeholder) -->
+        <!-- Bookings Tab (Calendar) -->
         <div id="tab-bookings" class="dashboard-tab-content">
-          <div class="d-flex justify-between align-center mb-6">
-            <h2 style="margin: 0;">My Bookings</h2>
+          <div class="d-flex justify-between align-center mb-6" style="flex-wrap: wrap; gap: var(--spacing-3);">
+            <div>
+              <h2 style="margin: 0;">My Bookings</h2>
+              <p class="text-muted" style="margin: 2px 0 0; font-size: 14px;">Schedule and manage your family's upcoming tutoring sessions.</p>
+            </div>
             <button class="btn btn-primary"><i class="ph ph-plus"></i> New Booking</button>
           </div>
           
-          <!-- Calendar Placeholder UI -->
-          <div class="card" style="padding: var(--spacing-6); text-align: left;">
-            <div class="d-flex justify-between align-center mb-6">
-              <h3 style="margin:0;">October 2026</h3>
-              <div class="d-flex gap-2">
-                <button class="btn btn-outline" style="padding: 4px 12px;"><i class="ph ph-caret-left"></i></button>
-                <button class="btn btn-outline" style="padding: 4px 12px;"><i class="ph ph-caret-right"></i></button>
+          <div class="card" style="padding: 0; overflow: hidden; text-align: left;">
+            <div class="calendar-wrapper">
+              <!-- Calendar Topbar -->
+              <div class="calendar-topbar">
+                <div class="d-flex align-center gap-3" style="flex-wrap: wrap;">
+                  <div class="d-flex align-center gap-2">
+                    <button class="btn btn-outline" style="padding: 6px 12px;" title="Previous Month"><i class="ph ph-caret-left"></i></button>
+                    <button class="btn btn-outline" style="padding: 6px 14px; font-size: 13px;">Today</button>
+                    <button class="btn btn-outline" style="padding: 6px 12px;" title="Next Month"><i class="ph ph-caret-right"></i></button>
+                  </div>
+                  <h3 style="margin: 0; font-size: 18px;">October 2026</h3>
+                </div>
+
+                <div class="calendar-legend">
+                  <span><span class="legend-dot legend-confirmed"></span> Confirmed</span>
+                  <span><span class="legend-dot legend-pending"></span> Pending</span>
+                  <span><span class="legend-dot legend-completed"></span> Completed</span>
+                </div>
+
+                <div class="calendar-view-toggle">
+                  <button class="cal-btn active">Month</button>
+                  <button class="cal-btn">Week</button>
+                  <button class="cal-btn">Day</button>
+                </div>
               </div>
-            </div>
-            <div class="calendar-placeholder">
-              <i class="ph ph-calendar-blank" style="font-size: 48px; margin-bottom: 16px;"></i>
-              <p class="text-muted">Interactive Calendar / Time-slot picker placeholder.</p>
-              <p class="text-muted" style="font-size: 14px;">(Integrates with scheduling engine)</p>
+
+              <!-- Calendar Day Names & Cells -->
+              <div class="calendar-grid">
+                <div class="calendar-day-header">Sun</div>
+                <div class="calendar-day-header">Mon</div>
+                <div class="calendar-day-header">Tue</div>
+                <div class="calendar-day-header">Wed</div>
+                <div class="calendar-day-header">Thu</div>
+                <div class="calendar-day-header">Fri</div>
+                <div class="calendar-day-header">Sat</div>
+
+                <!-- Week 1: Sep 27 - Oct 3 -->
+                <div class="calendar-cell other-month"><span class="day-number">27</span></div>
+                <div class="calendar-cell other-month"><span class="day-number">28</span></div>
+                <div class="calendar-cell other-month"><span class="day-number">29</span></div>
+                <div class="calendar-cell other-month"><span class="day-number">30</span></div>
+                <div class="calendar-cell">
+                  <span class="day-number">1</span>
+                  <div class="cal-event cal-event-completed" title="Algebra I with Sarah J.">
+                    <i class="ph ph-check-circle"></i> <span class="event-title">4:00 PM Algebra I</span>
+                  </div>
+                </div>
+                <div class="calendar-cell"><span class="day-number">2</span></div>
+                <div class="calendar-cell">
+                  <span class="day-number">3</span>
+                  <div class="cal-event cal-event-completed" title="Spanish with Elena R.">
+                    <i class="ph ph-check-circle"></i> <span class="event-title">11:00 AM Spanish</span>
+                  </div>
+                </div>
+
+                <!-- Week 2: Oct 4 - Oct 10 -->
+                <div class="calendar-cell"><span class="day-number">4</span></div>
+                <div class="calendar-cell">
+                  <span class="day-number">5</span>
+                  <div class="cal-event cal-event-completed" title="Algebra I with Sarah J.">
+                    <i class="ph ph-check-circle"></i> <span class="event-title">4:00 PM Algebra I</span>
+                  </div>
+                </div>
+                <div class="calendar-cell"><span class="day-number">6</span></div>
+                <div class="calendar-cell">
+                  <span class="day-number">7</span>
+                  <div class="cal-event cal-event-completed" title="AP Physics with David M.">
+                    <i class="ph ph-check-circle"></i> <span class="event-title">5:30 PM AP Physics</span>
+                  </div>
+                </div>
+                <div class="calendar-cell">
+                  <span class="day-number">8</span>
+                  <div class="cal-event cal-event-completed" title="Algebra I with Sarah J.">
+                    <i class="ph ph-check-circle"></i> <span class="event-title">4:00 PM Algebra I</span>
+                  </div>
+                </div>
+                <div class="calendar-cell"><span class="day-number">9</span></div>
+                <div class="calendar-cell">
+                  <span class="day-number">10</span>
+                  <div class="cal-event cal-event-completed" title="AP Physics with David M.">
+                    <i class="ph ph-check-circle"></i> <span class="event-title">10:00 AM AP Physics</span>
+                  </div>
+                </div>
+
+                <!-- Week 3: Oct 11 - Oct 17 -->
+                <div class="calendar-cell"><span class="day-number">11</span></div>
+                <div class="calendar-cell today">
+                  <span class="day-number">12</span>
+                  <div class="cal-event cal-event-primary" title="Algebra I with Sarah J. (Today)">
+                    <i class="ph ph-video-camera"></i> <span class="event-title">4:00 PM Algebra I</span>
+                  </div>
+                </div>
+                <div class="calendar-cell"><span class="day-number">13</span></div>
+                <div class="calendar-cell">
+                  <span class="day-number">14</span>
+                  <div class="cal-event cal-event-primary" title="Spanish with Elena R.">
+                    <i class="ph ph-clock"></i> <span class="event-title">3:30 PM Spanish</span>
+                  </div>
+                </div>
+                <div class="calendar-cell">
+                  <span class="day-number">15</span>
+                  <div class="cal-event cal-event-primary" title="AP Physics with David M.">
+                    <i class="ph ph-clock"></i> <span class="event-title">5:30 PM AP Physics</span>
+                  </div>
+                </div>
+                <div class="calendar-cell"><span class="day-number">16</span></div>
+                <div class="calendar-cell">
+                  <span class="day-number">17</span>
+                  <div class="cal-event cal-event-warning" title="SAT Math Prep (Pending Confirmation)">
+                    <i class="ph ph-hourglass"></i> <span class="event-title">10:00 AM SAT Prep</span>
+                  </div>
+                </div>
+
+                <!-- Week 4: Oct 18 - Oct 24 -->
+                <div class="calendar-cell"><span class="day-number">18</span></div>
+                <div class="calendar-cell">
+                  <span class="day-number">19</span>
+                  <div class="cal-event cal-event-primary" title="Algebra I with Sarah J.">
+                    <i class="ph ph-clock"></i> <span class="event-title">4:00 PM Algebra I</span>
+                  </div>
+                </div>
+                <div class="calendar-cell"><span class="day-number">20</span></div>
+                <div class="calendar-cell">
+                  <span class="day-number">21</span>
+                  <div class="cal-event cal-event-primary" title="Spanish with Elena R.">
+                    <i class="ph ph-clock"></i> <span class="event-title">3:30 PM Spanish</span>
+                  </div>
+                </div>
+                <div class="calendar-cell">
+                  <span class="day-number">22</span>
+                  <div class="cal-event cal-event-primary" title="AP Physics with David M.">
+                    <i class="ph ph-clock"></i> <span class="event-title">5:30 PM AP Physics</span>
+                  </div>
+                </div>
+                <div class="calendar-cell"><span class="day-number">23</span></div>
+                <div class="calendar-cell">
+                  <span class="day-number">24</span>
+                  <div class="cal-event cal-event-primary" title="Chemistry with Michael T.">
+                    <i class="ph ph-clock"></i> <span class="event-title">2:00 PM Chemistry</span>
+                  </div>
+                </div>
+
+                <!-- Week 5: Oct 25 - Oct 31 -->
+                <div class="calendar-cell"><span class="day-number">25</span></div>
+                <div class="calendar-cell">
+                  <span class="day-number">26</span>
+                  <div class="cal-event cal-event-primary" title="Algebra I with Sarah J.">
+                    <i class="ph ph-clock"></i> <span class="event-title">4:00 PM Algebra I</span>
+                  </div>
+                </div>
+                <div class="calendar-cell"><span class="day-number">27</span></div>
+                <div class="calendar-cell">
+                  <span class="day-number">28</span>
+                  <div class="cal-event cal-event-primary" title="Spanish with Elena R.">
+                    <i class="ph ph-clock"></i> <span class="event-title">3:30 PM Spanish</span>
+                  </div>
+                </div>
+                <div class="calendar-cell">
+                  <span class="day-number">29</span>
+                  <div class="cal-event cal-event-primary" title="AP Physics with David M.">
+                    <i class="ph ph-clock"></i> <span class="event-title">5:30 PM AP Physics</span>
+                  </div>
+                </div>
+                <div class="calendar-cell"><span class="day-number">30</span></div>
+                <div class="calendar-cell"><span class="day-number">31</span></div>
+              </div>
+
+              <!-- Selected Day Agenda Strip -->
+              <div class="calendar-agenda">
+                <div class="agenda-card">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-secondary); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;">
+                    <i class="ph ph-calendar-check"></i>
+                  </div>
+                  <div>
+                    <strong style="color: var(--color-heading); font-size: 14px;">Selected Day: Monday, Oct 12, 2026</strong>
+                    <p class="text-muted" style="margin: 0; font-size: 13px;">1 Lesson Scheduled: <strong>Algebra I with Sarah J.</strong> (4:00 PM - 5:00 PM &bull; Online)</p>
+                  </div>
+                </div>
+                <div class="calendar-agenda-actions">
+                  <button class="btn btn-outline" style="padding: 8px 14px; font-size: 13px;">Reschedule</button>
+                  <button class="btn btn-primary" style="padding: 8px 16px; font-size: 13px;"><i class="ph ph-video-camera"></i> Join Lesson</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -469,17 +1096,6 @@
                     <td><span class="badge" style="background: rgba(16, 185, 129, 0.1); color: var(--color-success);">Completed</span></td>
                     <td><button class="btn btn-outline" style="padding: 4px 12px; font-size: 12px;">View Note</button></td>
                   </tr>
-                  <!-- Expanded Note Example -->
-                  <tr style="background: rgba(13, 148, 136, 0.05);">
-                    <td colspan="5" style="padding: var(--spacing-4);">
-                      <h4 style="font-size: 14px; margin-bottom: 8px;">Progress Note from David M:</h4>
-                      <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: 8px;">"Chloe did an excellent job grasping the concepts of kinematics today. We worked through 5 practice problems. She struggled slightly with vector components, so I've assigned two supplementary worksheets focusing on that for our next session."</p>
-                      <div class="d-flex gap-2">
-                        <span class="badge" style="background: var(--color-bg-alt); border: 1px solid var(--color-border);">Topics: Kinematics, Vectors</span>
-                        <span class="badge" style="background: var(--color-bg-alt); border: 1px solid var(--color-border);">Homework: Assigned</span>
-                      </div>
-                    </td>
-                  </tr>
                   <tr>
                     <td>Oct 08, 2026</td>
                     <td>Ethan D.</td>
@@ -489,6 +1105,25 @@
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+
+          <!-- Selected note, shown under the table -->
+          <h3 class="mt-8 mb-4">Progress Note from David M.</h3>
+          <div class="card note-card">
+            <div class="note-head">
+              <div>
+                <h4>AP Physics &mdash; Chloe D.</h4>
+                <p class="text-muted">Oct 10, 2026 &bull; 60 minute session</p>
+              </div>
+              <span class="badge badge-verified"><i class="ph ph-check-circle"></i> Completed</span>
+            </div>
+            <p class="note-body">"Chloe did an excellent job grasping the concepts of kinematics today. We worked
+              through 5 practice problems. She struggled slightly with vector components, so I've assigned two
+              supplementary worksheets focusing on that for our next session."</p>
+            <div class="note-tags">
+              <span class="badge badge-subject">Topics: Kinematics, Vectors</span>
+              <span class="badge badge-subject">Homework: Assigned</span>
             </div>
           </div>
         </div>
@@ -554,9 +1189,9 @@
         <!-- Messages -->
         <div id="tab-messages" class="dashboard-tab-content">
           <h2 class="mb-6">Messages</h2>
-          <div class="card" style="padding: 0; display: flex; flex-direction: row; height: 600px; overflow: hidden;">
+          <div class="card chat-layout">
             <!-- Chat List -->
-            <div style="width: 300px; border-right: 1px solid var(--color-border); display: flex; flex-direction: column;">
+            <div class="chat-list">
               <div style="padding: var(--spacing-4); border-bottom: 1px solid var(--color-border);">
                 <input type="text" class="form-control" placeholder="Search chats...">
               </div>
@@ -628,44 +1263,28 @@
           </div>
           
           <div class="grid-2">
-            <div class="card" style="padding: var(--spacing-6); text-align: left; align-items: stretch;">
-              <div class="d-flex justify-between mb-4">
-                <div class="d-flex align-center gap-4">
-                  <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--color-secondary); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700;">ED</div>
-                  <div>
-                    <h3 style="margin: 0;">Ethan D.</h3>
-                    <p class="text-muted">8th Grade</p>
-                  </div>
-                </div>
-                <button class="btn btn-outline" style="padding: 4px 12px; height: fit-content;">Edit</button>
+            <div class="card child-card">
+              <div class="child-avatar"><i class="ph ph-user-circle"></i></div>
+              <h3 class="child-name">Ethan D.</h3>
+              <p class="text-muted child-grade">8th Grade</p>
+              <h4 class="child-label">Subjects Needing Help</h4>
+              <div class="child-subjects">
+                <span class="badge badge-subject">Algebra I</span>
+                <span class="badge badge-subject">English</span>
               </div>
-              <div class="mt-4">
-                <h4 style="font-size: 14px; margin-bottom: 8px; color: var(--color-text-muted); text-transform: uppercase;">Subjects Needing Help</h4>
-                <div class="d-flex gap-2 flex-wrap">
-                  <span class="badge badge-subject">Algebra I</span>
-                  <span class="badge badge-subject">English</span>
-                </div>
-              </div>
+              <button class="btn btn-outline child-edit"><i class="ph ph-pencil-simple"></i> Edit</button>
             </div>
 
-            <div class="card" style="padding: var(--spacing-6); text-align: left; align-items: stretch;">
-              <div class="d-flex justify-between mb-4">
-                <div class="d-flex align-center gap-4">
-                  <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--color-accent); color: white; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700;">CD</div>
-                  <div>
-                    <h3 style="margin: 0;">Chloe D.</h3>
-                    <p class="text-muted">High School Junior (11th)</p>
-                  </div>
-                </div>
-                <button class="btn btn-outline" style="padding: 4px 12px; height: fit-content;">Edit</button>
+            <div class="card child-card">
+              <div class="child-avatar child-avatar-accent"><i class="ph ph-user-circle"></i></div>
+              <h3 class="child-name">Chloe D.</h3>
+              <p class="text-muted child-grade">High School Junior (11th)</p>
+              <h4 class="child-label">Subjects Needing Help</h4>
+              <div class="child-subjects">
+                <span class="badge badge-subject">AP Physics</span>
+                <span class="badge badge-subject">SAT Prep</span>
               </div>
-              <div class="mt-4">
-                <h4 style="font-size: 14px; margin-bottom: 8px; color: var(--color-text-muted); text-transform: uppercase;">Subjects Needing Help</h4>
-                <div class="d-flex gap-2 flex-wrap">
-                  <span class="badge badge-subject">AP Physics</span>
-                  <span class="badge badge-subject">SAT Prep</span>
-                </div>
-              </div>
+              <button class="btn btn-outline child-edit"><i class="ph ph-pencil-simple"></i> Edit</button>
             </div>
           </div>
         </div>
@@ -718,29 +1337,49 @@
 
   <script src="assets/js/main.js"></script>
   <script>
-    // Dashboard Tabs Logic
+    // Dashboard Tabs & Calendar Logic
     document.addEventListener('DOMContentLoaded', () => {
+      // Any [data-tab] element switches tabs — sidebar links and the header
+      // profile button alike; only the sidebar shows the active state.
+      const triggers = document.querySelectorAll('[data-tab]');
       const links = document.querySelectorAll('.sidebar-link[data-tab]');
       const contents = document.querySelectorAll('.dashboard-tab-content');
 
-      links.forEach(link => {
-        link.addEventListener('click', (e) => {
+      triggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
           e.preventDefault();
-          
-          // Remove active from all
-          links.forEach(l => l.classList.remove('active'));
+
+          const tabId = trigger.getAttribute('data-tab');
+          const panel = document.getElementById('tab-' + tabId);
+          if (!panel) return;
+
+          links.forEach(l => l.classList.toggle('active', l.getAttribute('data-tab') === tabId));
           contents.forEach(c => c.classList.remove('active'));
-          
-          // Add active to current
-          link.classList.add('active');
-          const tabId = link.getAttribute('data-tab');
-          document.getElementById('tab-' + tabId).classList.add('active');
+          panel.classList.add('active');
 
           // Close sidebar on mobile after clicking
           const sidebar = document.querySelector('.dashboard-sidebar');
-          if(window.innerWidth <= 1024) {
+          if(window.innerWidth <= 1024 && sidebar) {
             sidebar.classList.remove('active');
           }
+        });
+      });
+
+      // Calendar View Buttons
+      const calBtns = document.querySelectorAll('.cal-btn');
+      calBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          calBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        });
+      });
+
+      // Calendar Day Selection
+      const cells = document.querySelectorAll('.calendar-cell:not(.other-month)');
+      cells.forEach(cell => {
+        cell.addEventListener('click', () => {
+          cells.forEach(c => c.classList.remove('today'));
+          cell.classList.add('today');
         });
       });
     });

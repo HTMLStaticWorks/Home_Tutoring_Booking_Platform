@@ -11,6 +11,9 @@
   <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+
   <!-- CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
   <link id="rtl-stylesheet" rel="stylesheet" href="assets/css/rtl.css" disabled>
@@ -183,24 +186,20 @@
         </div>
         <div class="subjects-grid">
           <div class="card subject-card">
-            <div
-              style="width: 100%; height: 160px; border-radius: var(--border-radius-lg); overflow: hidden; margin-bottom: var(--spacing-5);">
-              <img src="assets/images/subject-mathematics.jpg" alt="Mathematics tutoring"
-                style="width: 100%; height: 100%; object-fit: cover;">
+            <div class="subject-img-wrap">
+              <img src="assets/images/subject-mathematics.jpg" alt="Mathematics tutoring">
             </div>
             <div class="subject-icon">
               <i class="ph ph-calculator"></i>
             </div>
             <h3>Mathematics</h3>
-            <p class="text-muted mt-2">Algebra, Geometry, Calculus & beyond.</p>
+            <p class="text-muted mt-2">Algebra, Geometry, Calculus.</p>
             <a href="find-tutor.html" class="text-primary mt-4 d-flex align-center gap-2">View Tutors <i
                 class="ph ph-arrow-right"></i></a>
           </div>
           <div class="card subject-card">
-            <div
-              style="width: 100%; height: 160px; border-radius: var(--border-radius-lg); overflow: hidden; margin-bottom: var(--spacing-5);">
-              <img src="assets/images/subject-sciences.jpg" alt="Sciences tutoring"
-                style="width: 100%; height: 100%; object-fit: cover;">
+            <div class="subject-img-wrap">
+              <img src="assets/images/subject-sciences.jpg" alt="Sciences tutoring">
             </div>
             <div class="subject-icon">
               <i class="ph ph-atom"></i>
@@ -211,10 +210,8 @@
                 class="ph ph-arrow-right"></i></a>
           </div>
           <div class="card subject-card">
-            <div
-              style="width: 100%; height: 160px; border-radius: var(--border-radius-lg); overflow: hidden; margin-bottom: var(--spacing-5);">
-              <img src="assets/images/subject-languages.jpg" alt="Languages tutoring"
-                style="width: 100%; height: 100%; object-fit: cover;">
+            <div class="subject-img-wrap">
+              <img src="assets/images/subject-languages.jpg" alt="Languages tutoring">
             </div>
             <div class="subject-icon">
               <i class="ph ph-translate"></i>
@@ -225,10 +222,8 @@
                 class="ph ph-arrow-right"></i></a>
           </div>
           <div class="card subject-card">
-            <div
-              style="width: 100%; height: 160px; border-radius: var(--border-radius-lg); overflow: hidden; margin-bottom: var(--spacing-5);">
-              <img src="assets/images/subject-test-prep.jpg" alt="Test Prep tutoring"
-                style="width: 100%; height: 100%; object-fit: cover;">
+            <div class="subject-img-wrap">
+              <img src="assets/images/subject-test-prep.jpg" alt="Test Prep tutoring">
             </div>
             <div class="subject-icon">
               <i class="ph ph-exam"></i>
@@ -334,27 +329,29 @@
 
     <!-- About / Trust Section -->
     <section class="py-16 band-alt">
-      <div class="container grid-2 align-center">
-        <div>
-          <img src="assets/images/about-mother-child-studying.jpg" alt="Mother and child studying"
-            style="border-radius: var(--border-radius-lg); box-shadow: var(--shadow-lg);">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Safety First. Always.</h2>
+          <p class="section-subtitle">The most rigorous vetting process in private education.</p>
         </div>
-        <div style="padding-left: var(--spacing-8);">
-          <h2 class="section-title" style="text-align: left; margin-bottom: var(--spacing-4);">Safety First. Always.
-          </h2>
-          <p class="text-muted mb-4">We know that inviting a tutor into your home—whether physically or
-            virtually—requires absolute trust. That's why our vetting process is the most rigorous in the industry.</p>
-          <ul style="display: flex; flex-direction: column; gap: var(--spacing-3);">
-            <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-primary"
-                style="font-size: 24px;"></i> Comprehensive background checks</li>
-            <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-primary"
-                style="font-size: 24px;"></i> Verified academic credentials</li>
-            <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-primary"
-                style="font-size: 24px;"></i> Mandatory personal interviews</li>
-            <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-primary"
-                style="font-size: 24px;"></i> Continuous performance monitoring</li>
-          </ul>
-          <a href="about.html" class="btn btn-outline mt-6">Read About Our Vetting</a>
+
+        <div class="grid-2 align-center">
+          <div>
+            <img src="assets/images/about-mother-child-studying.jpg" alt="Mother and child studying"
+              style="border-radius: var(--border-radius-lg); box-shadow: var(--shadow-lg);">
+          </div>
+          <div class="text-center">
+            <p class="text-muted mb-4">We know that inviting a tutor into your home—whether physically or
+              virtually—requires absolute trust. That's why our vetting process is the most rigorous in the industry.
+            </p>
+            <ul class="check-list">
+              <li><i class="ph ph-check-circle"></i> Comprehensive background checks</li>
+              <li><i class="ph ph-check-circle"></i> Verified academic credentials</li>
+              <li><i class="ph ph-check-circle"></i> Mandatory personal interviews</li>
+              <li><i class="ph ph-check-circle"></i> Continuous performance monitoring</li>
+            </ul>
+            <a href="about.html" class="btn btn-primary mt-6">Read About Our Vetting</a>
+          </div>
         </div>
       </div>
     </section>
@@ -367,51 +364,48 @@
           <p class="section-subtitle">Real experiences from families using Tutorly.</p>
         </div>
         <div class="grid-3">
-          <div class="card" style="text-align: left; align-items: flex-start;">
-            <div class="d-flex gap-2 text-warning mb-4">
+          <div class="card testimonial-card">
+            <div class="testimonial-stars">
               <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
                 class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
             </div>
-            <p class="text-muted mb-6">"Finding a math tutor for my son used to be stressful. Tutorly's verified badges
-              and transparent reviews gave me confidence. His grades have improved tremendously!"</p>
-            <div class="d-flex align-center gap-4">
-              <img src="assets/images/testimonial-jennifer-d.jpg" alt="Jennifer D."
-                style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+            <p class="testimonial-quote">"Finding a math tutor for my son used to be stressful. Tutorly's verified badges
+              and transparent reviews gave me confidence. His grades have improved!"</p>
+            <div class="testimonial-author">
+              <img src="assets/images/testimonial-jennifer-d.jpg" alt="Jennifer D." class="testimonial-avatar">
               <div>
-                <h4 style="font-size: 16px;">Jennifer D.</h4>
-                <p class="text-muted" style="font-size: 12px;">Parent of 8th Grader</p>
+                <h4>Jennifer D.</h4>
+                <p>Parent of 8th Grader</p>
               </div>
             </div>
           </div>
-          <div class="card" style="text-align: left; align-items: flex-start;">
-            <div class="d-flex gap-2 text-warning mb-4">
+          <div class="card testimonial-card">
+            <div class="testimonial-stars">
               <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
                 class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
             </div>
-            <p class="text-muted mb-6">"The progress notes after every session are incredible. I finally know exactly
+            <p class="testimonial-quote">"The progress notes after every session are incredible. I finally know exactly
               what my daughter is working on and where she needs more support."</p>
-            <div class="d-flex align-center gap-4">
-              <img src="assets/images/testimonial-michael-k.jpg" alt="Michael K."
-                style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+            <div class="testimonial-author">
+              <img src="assets/images/testimonial-michael-k.jpg" alt="Michael K." class="testimonial-avatar">
               <div>
-                <h4 style="font-size: 16px;">Michael K.</h4>
-                <p class="text-muted" style="font-size: 12px;">Parent of High School Junior</p>
+                <h4>Michael K.</h4>
+                <p>Parent of High School Junior</p>
               </div>
             </div>
           </div>
-          <div class="card" style="text-align: left; align-items: flex-start;">
-            <div class="d-flex gap-2 text-warning mb-4">
+          <div class="card testimonial-card">
+            <div class="testimonial-stars">
               <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
                 class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
             </div>
-            <p class="text-muted mb-6">"We love our tutor! The scheduling through the parent dashboard is seamless. No
+            <p class="testimonial-quote">"We love our tutor! The scheduling through the parent dashboard is seamless. No
               more back-and-forth texting to find a time that works."</p>
-            <div class="d-flex align-center gap-4">
-              <img src="assets/images/testimonial-sarah-l.jpg" alt="Sarah L."
-                style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+            <div class="testimonial-author">
+              <img src="assets/images/testimonial-sarah-l.jpg" alt="Sarah L." class="testimonial-avatar">
               <div>
-                <h4 style="font-size: 16px;">Sarah L.</h4>
-                <p class="text-muted" style="font-size: 12px;">Parent of 4th Grader</p>
+                <h4>Sarah L.</h4>
+                <p>Parent of 4th Grader</p>
               </div>
             </div>
           </div>
@@ -424,7 +418,7 @@
         <h2 class="section-title" style="color: white;">Ready to boost your child's confidence?</h2>
         <p class="section-subtitle" style="color: rgba(255,255,255,0.8); margin-bottom: var(--spacing-8);">Join
           thousands of parents who trust Tutorly for their children's educational success.</p>
-        <a href="find-tutor.html" class="btn btn-accent" style="font-size: 18px; padding: 16px 32px;">Find Your Child's
+        <a href="find-tutor.html" class="btn btn-light" style="font-size: 18px; padding: 16px 32px;">Find Your Child's
           Tutor Today</a>
       </div>
     </section>

@@ -176,6 +176,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Back To Top — injected here so every page gets it without extra markup
+  const backToTop = document.createElement('button');
+  backToTop.type = 'button';
+  backToTop.className = 'back-to-top';
+  backToTop.setAttribute('aria-label', 'Back to top');
+  backToTop.setAttribute('title', 'Back to top');
+  backToTop.innerHTML = '<i class="ph ph-arrow-up"></i>';
+  document.body.appendChild(backToTop);
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+  });
+
+  let backToTopTicking = false;
+  const updateBackToTop = () => {
+    backToTop.classList.toggle('is-visible', window.scrollY > 500);
+    backToTopTicking = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!backToTopTicking) {
+      window.requestAnimationFrame(updateBackToTop);
+      backToTopTicking = true;
+    }
+  }, { passive: true });
+  updateBackToTop();
+
   // Scroll Progress Indicator
   if (!prefersReducedMotion) {
     const progress = document.createElement('div');

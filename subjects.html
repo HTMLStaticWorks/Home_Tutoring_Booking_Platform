@@ -9,6 +9,9 @@
   <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+
   <!-- CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
   <link id="rtl-stylesheet" rel="stylesheet" href="assets/css/rtl.css" disabled>
@@ -93,105 +96,105 @@
     <section class="py-16">
       <div class="container">
         
-        <!-- Filter Tabs (Visual Only for Template) -->
-        <div class="d-flex justify-center gap-4 mb-8" style="flex-wrap: wrap;">
-          <button class="btn btn-primary" style="border-radius: var(--border-radius-full);">All Subjects</button>
-          <button class="btn btn-outline" style="border-radius: var(--border-radius-full);">Elementary</button>
-          <button class="btn btn-outline" style="border-radius: var(--border-radius-full);">Middle School</button>
-          <button class="btn btn-outline" style="border-radius: var(--border-radius-full);">High School</button>
-          <button class="btn btn-outline" style="border-radius: var(--border-radius-full);">College</button>
+        <!-- Filter Tabs -->
+        <div class="d-flex justify-center gap-4 mb-8" style="flex-wrap: wrap;" id="subject-filter-tabs">
+          <button type="button" class="btn btn-primary filter-tab active" data-filter="all" style="border-radius: var(--border-radius-full);">All Subjects</button>
+          <button type="button" class="btn btn-outline filter-tab" data-filter="elementary" style="border-radius: var(--border-radius-full);">Elementary</button>
+          <button type="button" class="btn btn-outline filter-tab" data-filter="middle" style="border-radius: var(--border-radius-full);">Middle School</button>
+          <button type="button" class="btn btn-outline filter-tab" data-filter="high" style="border-radius: var(--border-radius-full);">High School</button>
+          <button type="button" class="btn btn-outline filter-tab" data-filter="college" style="border-radius: var(--border-radius-full);">College</button>
         </div>
 
-        <div class="grid-4" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: var(--spacing-6);">
+        <div class="subject-cards" id="subjects-container">
           
-          <div class="card subject-card" style="text-align: left; align-items: flex-start;">
+          <div class="card subject-card" data-grade="all elementary middle high college">
             <div class="subject-icon mb-4">
               <i class="ph ph-calculator"></i>
             </div>
             <h3>Mathematics</h3>
-            <ul class="text-muted mt-4" style="padding-left: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
-              <li>&bull; Pre-Algebra & Algebra</li>
-              <li>&bull; Geometry</li>
-              <li>&bull; Trigonometry</li>
-              <li>&bull; Calculus (AB/BC)</li>
-              <li>&bull; Statistics</li>
+            <ul class="subject-list">
+              <li>Pre-Algebra &amp; Algebra</li>
+              <li>Geometry</li>
+              <li>Trigonometry</li>
+              <li>Calculus (AB/BC)</li>
+              <li>Statistics</li>
             </ul>
-            <a href="find-tutor.html" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Math Tutors <i class="ph ph-arrow-right"></i></a>
+            <a href="find-tutor.html?subject=math" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Math Tutors <i class="ph ph-arrow-right"></i></a>
           </div>
 
-          <div class="card subject-card" style="text-align: left; align-items: flex-start;">
+          <div class="card subject-card" data-grade="all middle high college">
             <div class="subject-icon mb-4">
               <i class="ph ph-atom"></i>
             </div>
             <h3>Sciences</h3>
-            <ul class="text-muted mt-4" style="padding-left: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
-              <li>&bull; Earth Science</li>
-              <li>&bull; Biology</li>
-              <li>&bull; Chemistry</li>
-              <li>&bull; Physics</li>
-              <li>&bull; Environmental Science</li>
+            <ul class="subject-list">
+              <li>Earth Science</li>
+              <li>Biology</li>
+              <li>Chemistry</li>
+              <li>Physics</li>
+              <li>Environmental Science</li>
             </ul>
-            <a href="find-tutor.html" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Science Tutors <i class="ph ph-arrow-right"></i></a>
+            <a href="find-tutor.html?subject=sciences" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Science Tutors <i class="ph ph-arrow-right"></i></a>
           </div>
 
-          <div class="card subject-card" style="text-align: left; align-items: flex-start;">
+          <div class="card subject-card" data-grade="all elementary middle high college">
             <div class="subject-icon mb-4">
               <i class="ph ph-book-open"></i>
             </div>
-            <h3>English & Writing</h3>
-            <ul class="text-muted mt-4" style="padding-left: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
-              <li>&bull; Reading Comprehension</li>
-              <li>&bull; Essay Writing</li>
-              <li>&bull; Literature Analysis</li>
-              <li>&bull; Grammar & Syntax</li>
-              <li>&bull; Creative Writing</li>
+            <h3>English &amp; Writing</h3>
+            <ul class="subject-list">
+              <li>Reading Comprehension</li>
+              <li>Essay Writing</li>
+              <li>Literature Analysis</li>
+              <li>Grammar &amp; Syntax</li>
+              <li>Creative Writing</li>
             </ul>
-            <a href="find-tutor.html" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find English Tutors <i class="ph ph-arrow-right"></i></a>
+            <a href="find-tutor.html?subject=english" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find English Tutors <i class="ph ph-arrow-right"></i></a>
           </div>
 
-          <div class="card subject-card" style="text-align: left; align-items: flex-start;">
+          <div class="card subject-card" data-grade="all elementary middle high college">
             <div class="subject-icon mb-4">
               <i class="ph ph-translate"></i>
             </div>
             <h3>Languages</h3>
-            <ul class="text-muted mt-4" style="padding-left: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
-              <li>&bull; Spanish</li>
-              <li>&bull; French</li>
-              <li>&bull; Mandarin</li>
-              <li>&bull; German</li>
-              <li>&bull; ESL / TOEFL Prep</li>
+            <ul class="subject-list">
+              <li>Spanish</li>
+              <li>French</li>
+              <li>Mandarin</li>
+              <li>German</li>
+              <li>ESL / TOEFL Prep</li>
             </ul>
-            <a href="find-tutor.html" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Language Tutors <i class="ph ph-arrow-right"></i></a>
+            <a href="find-tutor.html?subject=languages" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Language Tutors <i class="ph ph-arrow-right"></i></a>
           </div>
 
-          <div class="card subject-card" style="text-align: left; align-items: flex-start;">
+          <div class="card subject-card" data-grade="all middle high college">
             <div class="subject-icon mb-4">
               <i class="ph ph-exam"></i>
             </div>
             <h3>Test Preparation</h3>
-            <ul class="text-muted mt-4" style="padding-left: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
-              <li>&bull; SAT / ACT</li>
-              <li>&bull; AP Exams</li>
-              <li>&bull; SSAT / ISEE</li>
-              <li>&bull; State Assessments</li>
-              <li>&bull; GRE / GMAT</li>
+            <ul class="subject-list">
+              <li>SAT / ACT</li>
+              <li>AP Exams</li>
+              <li>SSAT / ISEE</li>
+              <li>State Assessments</li>
+              <li>GRE / GMAT</li>
             </ul>
-            <a href="find-tutor.html" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Test Prep Tutors <i class="ph ph-arrow-right"></i></a>
+            <a href="find-tutor.html?subject=test-prep" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Test Prep Tutors <i class="ph ph-arrow-right"></i></a>
           </div>
 
-          <div class="card subject-card" style="text-align: left; align-items: flex-start;">
+          <div class="card subject-card" data-grade="all elementary middle high college">
             <div class="subject-icon mb-4">
               <i class="ph ph-code"></i>
             </div>
             <h3>Computer Science</h3>
-            <ul class="text-muted mt-4" style="padding-left: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
-              <li>&bull; Scratch / Block Coding</li>
-              <li>&bull; Python</li>
-              <li>&bull; Java / AP CS A</li>
-              <li>&bull; Web Development</li>
-              <li>&bull; Data Structures</li>
+            <ul class="subject-list">
+              <li>Scratch / Block Coding</li>
+              <li>Python</li>
+              <li>Java / AP CS A</li>
+              <li>Web Development</li>
+              <li>Data Structures</li>
             </ul>
-            <a href="find-tutor.html" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Coding Tutors <i class="ph ph-arrow-right"></i></a>
+            <a href="find-tutor.html?subject=cs" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Coding Tutors <i class="ph ph-arrow-right"></i></a>
           </div>
           
         </div>
@@ -209,55 +212,55 @@
         <div class="grid-3">
           
           <!-- Package 1 -->
-          <div class="card" style="padding: var(--spacing-8) var(--spacing-6);">
+          <div class="card price-card">
             <h3 class="mb-2">Pay As You Go</h3>
             <p class="text-muted mb-6">Perfect for occasional help or test prep.</p>
-            <div style="font-size: 48px; font-family: var(--font-heading); font-weight: 700; color: var(--color-primary); line-height: 1; margin-bottom: var(--spacing-6);">
+            <div class="price-amount">
               Varies
-              <span style="font-size: 16px; font-weight: 400; color: var(--color-text-muted);">/ hour</span>
+              <span>/ hour</span>
             </div>
-            <ul style="text-align: left; display: flex; flex-direction: column; gap: 12px; margin-bottom: var(--spacing-8); width: 100%;">
-              <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-success"></i> Pay per booked session</li>
-              <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-success"></i> Access to all verified tutors</li>
-              <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-success"></i> Progress notes included</li>
-              <li class="d-flex align-center gap-2 text-muted"><i class="ph ph-x text-muted"></i> No bulk discount</li>
+            <ul class="price-features">
+              <li><i class="ph ph-check-circle text-success"></i> Pay per booked session</li>
+              <li><i class="ph ph-check-circle text-success"></i> Access to all verified tutors</li>
+              <li><i class="ph ph-check-circle text-success"></i> Progress notes included</li>
+              <li class="text-muted"><i class="ph ph-x text-muted"></i> No bulk discount</li>
             </ul>
-            <a href="register.html" class="btn btn-outline" style="width: 100%;">Get Started</a>
+            <a href="register.html" class="btn btn-outline price-cta">Get Started</a>
           </div>
 
           <!-- Package 2 -->
-          <div class="card" style="padding: var(--spacing-8) var(--spacing-6); border: 2px solid var(--color-primary); position: relative; transform: scale(1.05); z-index: 2;">
-            <div style="position: absolute; top: -16px; left: 50%; transform: translateX(-50%); background-color: var(--color-primary); color: white; padding: 4px 16px; border-radius: 20px; font-size: 14px; font-weight: 600;">Most Popular</div>
+          <div class="card price-card price-card-featured">
+            <span class="price-tag">Most Popular</span>
             <h3 class="mb-2">10-Hour Bundle</h3>
             <p class="text-muted mb-6">Consistent weekly support for a semester.</p>
-            <div style="font-size: 48px; font-family: var(--font-heading); font-weight: 700; color: var(--color-primary); line-height: 1; margin-bottom: var(--spacing-6);">
+            <div class="price-amount">
               $450
-              <span style="font-size: 16px; font-weight: 400; color: var(--color-text-muted);">/ bundle</span>
+              <span>/ bundle</span>
             </div>
-            <ul style="text-align: left; display: flex; flex-direction: column; gap: 12px; margin-bottom: var(--spacing-8); width: 100%;">
-              <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-success"></i> 10 hours of tutoring credits</li>
-              <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-success"></i> 10% discount on hourly rates</li>
-              <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-success"></i> Priority scheduling</li>
-              <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-success"></i> Unused hours roll over</li>
+            <ul class="price-features">
+              <li><i class="ph ph-check-circle text-success"></i> 10 hours of tutoring credits</li>
+              <li><i class="ph ph-check-circle text-success"></i> 10% discount on hourly rates</li>
+              <li><i class="ph ph-check-circle text-success"></i> Priority scheduling</li>
+              <li><i class="ph ph-check-circle text-success"></i> Unused hours roll over</li>
             </ul>
-            <a href="register.html" class="btn btn-primary" style="width: 100%;">Buy Bundle</a>
+            <a href="register.html" class="btn btn-primary price-cta">Buy Bundle</a>
           </div>
 
           <!-- Package 3 -->
-          <div class="card" style="padding: var(--spacing-8) var(--spacing-6);">
+          <div class="card price-card">
             <h3 class="mb-2">Monthly Mastery</h3>
             <p class="text-muted mb-6">Intensive support for academic excellence.</p>
-            <div style="font-size: 48px; font-family: var(--font-heading); font-weight: 700; color: var(--color-primary); line-height: 1; margin-bottom: var(--spacing-6);">
+            <div class="price-amount">
               $800
-              <span style="font-size: 16px; font-weight: 400; color: var(--color-text-muted);">/ 20 hrs</span>
+              <span>/ 20 hrs</span>
             </div>
-            <ul style="text-align: left; display: flex; flex-direction: column; gap: 12px; margin-bottom: var(--spacing-8); width: 100%;">
-              <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-success"></i> 20 hours of tutoring credits</li>
-              <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-success"></i> 20% discount on hourly rates</li>
-              <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-success"></i> Dedicated success coach</li>
-              <li class="d-flex align-center gap-2"><i class="ph ph-check-circle text-success"></i> Unused hours roll over</li>
+            <ul class="price-features">
+              <li><i class="ph ph-check-circle text-success"></i> 20 hours of tutoring credits</li>
+              <li><i class="ph ph-check-circle text-success"></i> 20% discount on hourly rates</li>
+              <li><i class="ph ph-check-circle text-success"></i> Dedicated success coach</li>
+              <li><i class="ph ph-check-circle text-success"></i> Unused hours roll over</li>
             </ul>
-            <a href="register.html" class="btn btn-outline" style="width: 100%;">Buy Bundle</a>
+            <a href="register.html" class="btn btn-outline price-cta">Buy Bundle</a>
           </div>
 
         </div>
@@ -317,5 +320,43 @@
   </footer>
 
   <script src="assets/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterTabs = document.querySelectorAll('#subject-filter-tabs .filter-tab');
+      const subjectCards = document.querySelectorAll('#subjects-container .subject-card');
+
+      filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const filter = tab.getAttribute('data-filter');
+
+          // Update button styling
+          filterTabs.forEach(t => {
+            t.classList.remove('btn-primary', 'active');
+            t.classList.add('btn-outline');
+          });
+          tab.classList.remove('btn-outline');
+          tab.classList.add('btn-primary', 'active');
+
+          // Filter subject cards
+          subjectCards.forEach(card => {
+            const grades = (card.getAttribute('data-grade') || '').split(' ');
+            if (filter === 'all' || grades.includes(filter)) {
+              card.style.display = 'flex';
+              setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+              }, 10);
+            } else {
+              card.style.opacity = '0';
+              card.style.transform = 'translateY(8px)';
+              setTimeout(() => {
+                card.style.display = 'none';
+              }, 200);
+            }
+          });
+        });
+      });
+    });
+  </script>
 </body>
 </html>

@@ -11,6 +11,9 @@
   <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+
   <!-- CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
   <link id="rtl-stylesheet" rel="stylesheet" href="assets/css/rtl.css" disabled>
@@ -95,62 +98,82 @@
     <!-- Vetting Process -->
     <section class="py-16">
       <div class="container">
-        <div class="grid-2 align-center">
-          <div>
-            <span
-              style="color: var(--color-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 14px;">Trust
-              & Safety</span>
-            <h2 class="section-title text-left mt-2 mb-6" style="margin-left: 0; max-width: none;">Our 4-Step Vetting
-              Process</h2>
-            <p class="text-muted mb-6">Less than 10% of applicants make it onto the Tutorly platform. When you see a
-              "Verified" badge, it means the tutor has passed our rigorous safety and quality checks.</p>
+        <div class="section-header">
+          <h2 class="section-title">Our 4-Step Vetting Process</h2>
+          <p class="section-subtitle">Less than 10% of applicants make it onto the Tutorly platform. Click through each
+            check a tutor has to clear.</p>
+        </div>
 
-            <div style="display: flex; flex-direction: column; gap: var(--spacing-6);">
-              <div class="d-flex gap-4">
-                <div
-                  style="width: 48px; height: 48px; flex-shrink: 0; background-color: var(--color-secondary); color: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px;">
-                  1</div>
-                <div>
-                  <h4 style="font-size: 18px; margin-bottom: 4px;">Identity & Background Check</h4>
-                  <p class="text-muted">Comprehensive national and county criminal background checks, plus identity
-                    verification via government-issued ID.</p>
-                </div>
-              </div>
-              <div class="d-flex gap-4">
-                <div
-                  style="width: 48px; height: 48px; flex-shrink: 0; background-color: var(--color-secondary); color: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px;">
-                  2</div>
-                <div>
-                  <h4 style="font-size: 18px; margin-bottom: 4px;">Credential Verification</h4>
-                  <p class="text-muted">We manually verify university degrees, teaching licenses, and any specialized
-                    certifications claimed on their profile.</p>
-                </div>
-              </div>
-              <div class="d-flex gap-4">
-                <div
-                  style="width: 48px; height: 48px; flex-shrink: 0; background-color: var(--color-secondary); color: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px;">
-                  3</div>
-                <div>
-                  <h4 style="font-size: 18px; margin-bottom: 4px;">Subject Matter Testing</h4>
-                  <p class="text-muted">Tutors must pass rigorous proficiency exams in the specific subjects they wish
-                    to teach.</p>
-                </div>
-              </div>
-              <div class="d-flex gap-4">
-                <div
-                  style="width: 48px; height: 48px; flex-shrink: 0; background-color: var(--color-secondary); color: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px;">
-                  4</div>
-                <div>
-                  <h4 style="font-size: 18px; margin-bottom: 4px;">Live Interview</h4>
-                  <p class="text-muted">A face-to-face interview to assess communication skills, teaching philosophy,
-                    and overall professionalism.</p>
-                </div>
+        <div class="showcase" data-showcase data-autoplay="6000">
+          <div class="showcase-tabs" role="tablist" aria-label="Steps of the tutor vetting process">
+            <button type="button" class="showcase-tab" role="tab" id="vet-tab-1" aria-controls="vet-panel-1"
+              aria-selected="true">
+              <span class="showcase-tab-icon"><i class="ph ph-identification-badge"></i></span>
+              <span>
+                <span class="showcase-tab-title">1. Identity &amp; Background Check</span>
+                <span class="showcase-tab-text">National and county criminal background checks, plus identity
+                  verification via government-issued ID.</span>
+              </span>
+            </button>
+            <button type="button" class="showcase-tab" role="tab" id="vet-tab-2" aria-controls="vet-panel-2"
+              aria-selected="false" tabindex="-1">
+              <span class="showcase-tab-icon"><i class="ph ph-graduation-cap"></i></span>
+              <span>
+                <span class="showcase-tab-title">2. Credential Verification</span>
+                <span class="showcase-tab-text">We manually verify university degrees, teaching licences and every
+                  specialised certification claimed.</span>
+              </span>
+            </button>
+            <button type="button" class="showcase-tab" role="tab" id="vet-tab-3" aria-controls="vet-panel-3"
+              aria-selected="false" tabindex="-1">
+              <span class="showcase-tab-icon"><i class="ph ph-exam"></i></span>
+              <span>
+                <span class="showcase-tab-title">3. Subject Matter Testing</span>
+                <span class="showcase-tab-text">Tutors must pass rigorous proficiency exams in the exact subjects they
+                  want to teach.</span>
+              </span>
+            </button>
+            <button type="button" class="showcase-tab" role="tab" id="vet-tab-4" aria-controls="vet-panel-4"
+              aria-selected="false" tabindex="-1">
+              <span class="showcase-tab-icon"><i class="ph ph-video-camera"></i></span>
+              <span>
+                <span class="showcase-tab-title">4. Live Interview</span>
+                <span class="showcase-tab-text">A face-to-face interview assessing communication, teaching philosophy
+                  and professionalism.</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="showcase-stage">
+            <div class="showcase-panel is-active" role="tabpanel" id="vet-panel-1" aria-labelledby="vet-tab-1">
+              <img src="assets/images/vet-identity-check.jpg" alt="Identity documents being checked">
+              <div class="showcase-caption">
+                <h4>Who they say they are</h4>
+                <p>Government ID and a full criminal record check before an application goes any further.</p>
               </div>
             </div>
-          </div>
-          <div style="padding-left: var(--spacing-8);" class="d-none d-lg-block">
-            <img src="assets/images/vetting-process.jpg" alt="Tutorly Vetting"
-              style="border-radius: var(--border-radius-lg); box-shadow: var(--shadow-lg);">
+            <div class="showcase-panel" role="tabpanel" id="vet-panel-2" aria-labelledby="vet-tab-2">
+              <img src="assets/images/vet-credential-check.jpg" alt="Academic credentials being reviewed">
+              <div class="showcase-caption">
+                <h4>Qualified, and proven</h4>
+                <p>Degrees and licences checked against the issuing institution — never taken on trust.</p>
+              </div>
+            </div>
+            <div class="showcase-panel" role="tabpanel" id="vet-panel-3" aria-labelledby="vet-tab-3">
+              <img src="assets/images/vet-subject-exam.jpg" alt="A subject proficiency exam paper">
+              <div class="showcase-caption">
+                <h4>They know the material</h4>
+                <p>Subject exams per topic, so a maths tutor is tested on the maths they will teach.</p>
+              </div>
+            </div>
+            <div class="showcase-panel" role="tabpanel" id="vet-panel-4" aria-labelledby="vet-tab-4">
+              <img src="assets/images/vet-live-interview.jpg" alt="A tutor being interviewed">
+              <div class="showcase-caption">
+                <h4>They can actually teach</h4>
+                <p>A live interview with our team — the last step fewer than one in ten applicants reach.</p>
+              </div>
+            </div>
+            <div class="showcase-timer" data-showcase-timer aria-hidden="true"></div>
           </div>
         </div>
       </div>
