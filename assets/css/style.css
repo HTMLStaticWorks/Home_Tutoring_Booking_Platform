@@ -1247,7 +1247,10 @@ html[dir="rtl"] .hero-rating { margin-left: 0; margin-right: 6px; }
 }
 .hero-float span {
   font-size: 12px;
-  color: var(--color-text-muted);
+  /* Not the muted tone: this pill is translucent over a photograph, so the
+     effective background shifts with the image and muted only reached 4.0:1
+     against a dark one. The bold heading above still carries the hierarchy. */
+  color: var(--color-text);
 }
 .hero-float-icon {
   display: flex;
@@ -1293,7 +1296,23 @@ html[dir="rtl"] .hero-rating { margin-left: 0; margin-right: 6px; }
 @media (max-width: 560px) {
   .hero-float-top { left: 0; top: 4%; }
   .hero-float-bottom { right: 0; bottom: 4%; }
-  .hero-float span { display: none; }
+  /* The subtext used to be dropped here to keep the pill narrow. Trimming the
+     icon, padding and type reclaims enough width to keep it — the badge needs
+     about 215px against the 312px photo at 360px wide. max-width is the
+     backstop so it can never run past the photo on a narrower phone. */
+  .hero-float {
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-3);
+    max-width: calc(100% - 8px);
+  }
+  .hero-float-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 17px;
+    border-radius: 10px;
+  }
+  .hero-float strong { font-size: 13px; }
+  .hero-float span { font-size: 11px; line-height: 1.35; }
   .hero-trust { flex-direction: column; text-align: center; gap: var(--spacing-3); }
 }
 /* Narrow phones: stack the hero buttons so both are exactly the same size */
