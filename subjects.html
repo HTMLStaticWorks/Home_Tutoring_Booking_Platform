@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light" dir="ltr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tutorly | Subjects & Services</title>
   <meta name="description" content="Explore subjects and lesson packages offered by Tutorly.">
-  
+
   <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
-  
+
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
 
@@ -16,6 +17,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link id="rtl-stylesheet" rel="stylesheet" href="assets/css/rtl.css" disabled>
 </head>
+
 <body>
 
   <!-- Header -->
@@ -24,7 +26,7 @@
       <a href="index.html" class="logo">
         <i class="ph ph-student"></i> Tutorly
       </a>
-      
+
       <nav class="nav-links">
         <a href="index.html" class="nav-link">Home</a>
         <a href="home2.html" class="nav-link">Home 2</a>
@@ -95,18 +97,23 @@
     <!-- Subjects Grid -->
     <section class="py-16">
       <div class="container">
-        
+
         <!-- Filter Tabs -->
         <div class="d-flex justify-center gap-4 mb-8" style="flex-wrap: wrap;" id="subject-filter-tabs">
-          <button type="button" class="btn btn-primary filter-tab active" data-filter="all" style="border-radius: var(--border-radius-full);">All Subjects</button>
-          <button type="button" class="btn btn-outline filter-tab" data-filter="elementary" style="border-radius: var(--border-radius-full);">Elementary</button>
-          <button type="button" class="btn btn-outline filter-tab" data-filter="middle" style="border-radius: var(--border-radius-full);">Middle School</button>
-          <button type="button" class="btn btn-outline filter-tab" data-filter="high" style="border-radius: var(--border-radius-full);">High School</button>
-          <button type="button" class="btn btn-outline filter-tab" data-filter="college" style="border-radius: var(--border-radius-full);">College</button>
+          <button type="button" class="btn btn-primary filter-tab active" data-filter="all"
+            style="border-radius: var(--border-radius-full);">All Subjects</button>
+          <button type="button" class="btn btn-outline filter-tab" data-filter="elementary"
+            style="border-radius: var(--border-radius-full);">Elementary</button>
+          <button type="button" class="btn btn-outline filter-tab" data-filter="middle"
+            style="border-radius: var(--border-radius-full);">Middle School</button>
+          <button type="button" class="btn btn-outline filter-tab" data-filter="high"
+            style="border-radius: var(--border-radius-full);">High School</button>
+          <button type="button" class="btn btn-outline filter-tab" data-filter="college"
+            style="border-radius: var(--border-radius-full);">College</button>
         </div>
 
         <div class="subject-cards" id="subjects-container">
-          
+
           <div class="card subject-card" data-grade="all elementary middle high college">
             <div class="subject-icon mb-4">
               <i class="ph ph-calculator"></i>
@@ -119,7 +126,9 @@
               <li>Calculus (AB/BC)</li>
               <li>Statistics</li>
             </ul>
-            <a href="find-tutor.html?subject=math" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Math Tutors <i class="ph ph-arrow-right"></i></a>
+            <a href="find-tutor.html?subject=math"
+              class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Math Tutors <i
+                class="ph ph-arrow-right"></i></a>
           </div>
 
           <div class="card subject-card" data-grade="all middle high college">
@@ -134,7 +143,9 @@
               <li>Physics</li>
               <li>Environmental Science</li>
             </ul>
-            <a href="find-tutor.html?subject=sciences" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Science Tutors <i class="ph ph-arrow-right"></i></a>
+            <a href="find-tutor.html?subject=sciences"
+              class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Science Tutors <i
+                class="ph ph-arrow-right"></i></a>
           </div>
 
           <div class="card subject-card" data-grade="all elementary middle high college">
@@ -149,7 +160,9 @@
               <li>Grammar &amp; Syntax</li>
               <li>Creative Writing</li>
             </ul>
-            <a href="find-tutor.html?subject=english" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find English Tutors <i class="ph ph-arrow-right"></i></a>
+            <a href="find-tutor.html?subject=english"
+              class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find English Tutors <i
+                class="ph ph-arrow-right"></i></a>
           </div>
 
           <div class="card subject-card" data-grade="all elementary middle high college">
@@ -164,7 +177,9 @@
               <li>German</li>
               <li>ESL / TOEFL Prep</li>
             </ul>
-            <a href="find-tutor.html?subject=languages" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Language Tutors <i class="ph ph-arrow-right"></i></a>
+            <a href="find-tutor.html?subject=languages"
+              class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Language Tutors <i
+                class="ph ph-arrow-right"></i></a>
           </div>
 
           <div class="card subject-card" data-grade="all middle high college">
@@ -179,7 +194,9 @@
               <li>State Assessments</li>
               <li>GRE / GMAT</li>
             </ul>
-            <a href="find-tutor.html?subject=test-prep" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Test Prep Tutors <i class="ph ph-arrow-right"></i></a>
+            <a href="find-tutor.html?subject=test-prep"
+              class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Test Prep Tutors <i
+                class="ph ph-arrow-right"></i></a>
           </div>
 
           <div class="card subject-card" data-grade="all elementary middle high college">
@@ -194,9 +211,11 @@
               <li>Web Development</li>
               <li>Data Structures</li>
             </ul>
-            <a href="find-tutor.html?subject=cs" class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Coding Tutors <i class="ph ph-arrow-right"></i></a>
+            <a href="find-tutor.html?subject=cs"
+              class="text-primary mt-4 d-flex align-center gap-2 font-weight-500">Find Coding Tutors <i
+                class="ph ph-arrow-right"></i></a>
           </div>
-          
+
         </div>
       </div>
     </section>
@@ -206,15 +225,16 @@
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">Lesson Packages</h2>
-          <p class="section-subtitle">Transparent pricing with zero hidden fees. Purchase session hours that can be used with any tutor.</p>
+          <p class="section-subtitle">Transparent pricing with zero hidden fees. Purchase session hours that can be used
+            with any tutor.</p>
         </div>
-        
+
         <div class="grid-3">
-          
+
           <!-- Package 1 -->
           <div class="card price-card">
             <h3 class="mb-2">Pay As You Go</h3>
-            <p class="text-muted mb-6">Perfect for occasional help or test prep.</p>
+            <p class="text-muted mb-6">Perfect for occasional help needed or test prep.</p>
             <div class="price-amount">
               Varies
               <span>/ hour</span>
@@ -264,8 +284,9 @@
           </div>
 
         </div>
-        
-        <p class="text-center text-muted mt-8" style="font-size: 14px;">Payments are processed securely via Stripe. Unused hours never expire.</p>
+
+        <p class="text-center text-muted mt-8" style="font-size: 14px;">Payments are processed securely via Stripe.
+          Unused hours never expire.</p>
       </div>
     </section>
   </main>
@@ -359,4 +380,5 @@
     });
   </script>
 </body>
+
 </html>

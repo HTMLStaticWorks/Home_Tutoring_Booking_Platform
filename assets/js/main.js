@@ -202,29 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
   updateBackToTop();
 
-  // Scroll Progress Indicator
-  if (!prefersReducedMotion) {
-    const progress = document.createElement('div');
-    progress.className = 'scroll-progress';
-    document.body.appendChild(progress);
-
-    let ticking = false;
-    const updateProgress = () => {
-      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
-      progress.style.transform = `scaleX(${Math.min(Math.max(ratio, 0), 1)})`;
-      ticking = false;
-    };
-
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateProgress);
-        ticking = true;
-      }
-    }, { passive: true });
-    updateProgress();
-  }
-
   // FAQ Accordion — one answer open at a time
   document.querySelectorAll('[data-accordion]').forEach(list => {
     const items = Array.from(list.querySelectorAll('.faq-item'));

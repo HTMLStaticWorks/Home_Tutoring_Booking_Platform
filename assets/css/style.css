@@ -547,21 +547,6 @@ h1, h2, h3 { text-wrap: balance; }
   color: var(--color-primary);
 }
 
-/* Scroll progress indicator */
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 2px;
-  width: 100%;
-  transform: scaleX(0);
-  transform-origin: left center;
-  background-image: linear-gradient(90deg, var(--color-primary), var(--color-primary-light), var(--color-accent));
-  z-index: 1200;
-  pointer-events: none;
-}
-html[dir="rtl"] .scroll-progress { transform-origin: right center; }
-
 /* Mobile Drawer */
 .mobile-drawer-overlay {
   position: fixed;
@@ -1326,6 +1311,25 @@ html[dir="rtl"] .hero-rating { margin-left: 0; margin-right: 6px; }
   grid-template-columns: repeat(4, 1fr);
   gap: var(--spacing-6);
 }
+/* An aspect ratio rather than a fixed height: the frame is about 200px wide
+   at four across but over 400px at two, so a fixed 140px turned the photo
+   into a 2.9:1 letterbox on tablets. Holding the ratio keeps the same crop
+   at every width and lets the image grow with the card. */
+.step-img-wrap {
+  width: 100%;
+  aspect-ratio: 7 / 5;
+  /* Only bites in the single-column range, where a full-width card would
+     otherwise give a 377px-tall photo that swamps the copy beneath it. */
+  max-height: 300px;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  margin-bottom: var(--spacing-5);
+}
+.step-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .step-card {
   position: relative;
   padding: var(--spacing-6);
@@ -1362,7 +1366,10 @@ html[dir="rtl"] .hero-rating { margin-left: 0; margin-right: 6px; }
   box-shadow: var(--shadow-primary), 0 0 0 10px rgba(13, 148, 136, 0.10);
 }
 
-@media (max-width: 992px) {
+/* 4 across on desktop, 2x2 from 1024 down — at that width four cards leave
+   each one about 230px, too narrow for the copy — then a single column on
+   phones. */
+@media (max-width: 1024px) {
   .steps-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 640px) {
@@ -2326,8 +2333,15 @@ html[dir="rtl"] .sidebar-link:hover, html[dir="rtl"] .sidebar-link.active {
   border-collapse: collapse;
   font-size: 15px;
 }
+/* Both halves are pinned explicitly: .card sets text-align: center and that
+   inherits down into the body cells, while the UA stylesheet centres <th> on
+   its own account. Leave either one implicit and the rows stop lining up
+   under their headers. */
+.dashboard-table th,
+.dashboard-table td { text-align: left; }
+html[dir="rtl"] .dashboard-table th,
+html[dir="rtl"] .dashboard-table td { text-align: right; }
 .dashboard-table th {
-  text-align: left;
   padding: var(--spacing-4) var(--spacing-5);
   font-family: var(--font-heading);
   font-size: 11px;
@@ -2339,7 +2353,6 @@ html[dir="rtl"] .sidebar-link:hover, html[dir="rtl"] .sidebar-link.active {
   border-bottom: 1px solid var(--color-border);
   white-space: nowrap;
 }
-html[dir="rtl"] .dashboard-table th { text-align: right; }
 .dashboard-table td {
   padding: var(--spacing-4) var(--spacing-5);
   border-bottom: 1px solid var(--color-border);
@@ -2870,10 +2883,18 @@ html[dir="rtl"] .progress-note {
   transition: transform 0.9s var(--ease-out);
 }
 .story-slide:hover .story-photo img { transform: scale(1.06); }
+/* This badge floats over a photograph, so it can't inherit the tinted, mostly
+   transparent surface the on-card badges use — whatever the image happens to
+   be behind it decides the contrast. It carries its own opaque pill instead,
+   identical in both themes. */
 .story-photo .badge {
   position: absolute;
   inset-inline-start: var(--spacing-4);
   top: var(--spacing-4);
+  background-color: rgba(11, 79, 73, 0.92);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #EAFBF7;
+  box-shadow: 0 6px 18px -8px rgba(6, 22, 20, 0.75);
 }
 .story-body {
   padding: var(--spacing-8);

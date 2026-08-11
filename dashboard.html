@@ -490,7 +490,7 @@
     }
     .cal-event-primary {
       background-color: var(--color-secondary);
-      color: var(--color-primary-hover);
+      color: var(--color-primary-text);
       border-left: 3px solid var(--color-primary);
     }
     [data-theme="dark"] .cal-event-primary {
@@ -562,9 +562,37 @@
       .calendar-day-header { font-size: 11px; padding: var(--spacing-2) 0; }
     }
     @media (max-width: 480px) {
-      .calendar-cell { min-height: 52px; }
-      .cal-event span.event-title { display: none; }
-      .cal-event { width: 8px; height: 8px; border-radius: 50%; padding: 0; margin: 2px auto 0; }
+      /* Seven columns leave roughly 45px per cell at this width, which is why
+         the events used to collapse to dots — "4:00 PM Algebra I" has nowhere
+         to go. The month grid becomes a day-by-day agenda instead, so each
+         booking gets a full-width row and keeps its time and subject. The
+         weekday header and empty days carry no meaning in list form and drop
+         out; today stays even when nothing is booked. */
+      .calendar-grid { display: block; }
+      .calendar-day-header { display: none; }
+      .calendar-cell:not(:has(.cal-event)):not(.today) { display: none; }
+
+      .calendar-cell {
+        min-height: 0;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--spacing-3);
+        padding: var(--spacing-3) var(--spacing-4);
+        border-right: none;
+      }
+      .day-number {
+        flex-shrink: 0;
+        min-width: 22px;
+        margin-bottom: 0;
+        font-size: 13px;
+        text-align: center;
+      }
+      .cal-event {
+        flex: 1;
+        min-width: 0;
+        font-size: 13px;
+        padding: 6px 10px;
+      }
       .calendar-agenda-actions .btn {
         flex: 1 1 auto;
         min-width: 130px;
