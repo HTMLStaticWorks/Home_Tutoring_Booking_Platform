@@ -21,20 +21,27 @@
   --color-accent-light: #E6C46F;
   --color-accent-ink: #16302C;
 
-  /* Neutrals — Light Theme */
+  /* Teal used as small text on light surfaces. The brand teal only clears
+     3.8:1 on white, so links and labels get a deeper shade of it. */
+  --color-primary-text: #0B6B63;
+  --color-primary-text-hover: #0D7A70;
+
+  /* Neutrals — Light Theme.
+     Body sits near 8:1 and muted near 5:1 on both the page and card
+     backgrounds, so the hierarchy survives without dropping below AA. */
   --color-bg: #F5F8F7;
   --color-bg-alt: #FFFFFF;
   --color-surface-2: #FAFCFB;
-  --color-text: #4B5D5B;
-  --color-text-muted: #748785;
+  --color-text: #3B4E4C;
+  --color-text-muted: #5C716E;
   --color-heading: #0A2320;
 
   --color-border: #E3EAE8;
   --color-border-strong: #D2DEDB;
 
-  --color-success: #0F9D6E;
-  --color-warning: #C88A18;
-  --color-error: #E0524B;
+  --color-success: #0A7A55;
+  --color-warning: #8A5D06;
+  --color-error: #C0362F;
 
   /* Glass */
   --glass-bg: rgba(255, 255, 255, 0.72);
@@ -88,6 +95,13 @@
 [data-theme="dark"] {
   --color-primary-glow: rgba(20, 184, 166, 0.30);
   --color-secondary: #12302C;
+
+  /* On dark surfaces the contrast problem inverts: these need to stay bright. */
+  --color-primary-text: #5EEAD4;
+  --color-primary-text-hover: #99F6E4;
+  --color-success: #0F9D6E;
+  --color-warning: #C88A18;
+  --color-error: #E0524B;
 
   --color-bg: #060F0E;
   --color-bg-alt: #0D1918;
@@ -150,13 +164,13 @@ h3 { font-size: 21px; }
 h4 { font-size: 18px; letter-spacing: -0.015em; }
 
 a {
-  color: var(--color-primary);
+  color: var(--color-primary-text);
   text-decoration: none;
   transition: var(--transition);
 }
 
 a:hover {
-  color: var(--color-primary-hover);
+  color: var(--color-primary-text-hover);
 }
 
 img {
@@ -209,7 +223,7 @@ h1, h2, h3 { text-wrap: balance; }
 .text-center { text-align: center; }
 .text-left { text-align: left; }
 .text-right { text-align: right; }
-.text-primary { color: var(--color-primary); }
+.text-primary { color: var(--color-primary-text); }
 .text-accent { color: var(--color-accent); }
 .text-muted { color: var(--color-text-muted); }
 .text-success { color: var(--color-success); }
@@ -392,7 +406,7 @@ h1, h2, h3 { text-wrap: balance; }
 .badge-subject {
   background-color: var(--color-secondary);
   border-color: rgba(13, 148, 136, 0.16);
-  color: var(--color-primary-hover);
+  color: var(--color-primary-text);
 }
 [data-theme="dark"] .badge-subject {
   background-color: rgba(13, 148, 136, 0.16);
@@ -481,7 +495,7 @@ h1, h2, h3 { text-wrap: balance; }
   transition: transform 0.35s var(--ease-out);
 }
 .nav-link:hover, .nav-link.active {
-  color: var(--color-primary);
+  color: var(--color-primary-text);
 }
 .nav-link:hover::after, .nav-link.active::after {
   transform: scaleX(1);
@@ -690,7 +704,7 @@ html[dir="rtl"] .scroll-progress { transform-origin: right center; }
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-primary);
+  color: var(--color-primary-text);
 }
 .section-header {
   text-align: center;
@@ -743,6 +757,9 @@ html[dir="rtl"] .scroll-progress { transform-origin: right center; }
 
 /* CTA band */
 .cta-band {
+  /* Dark band in both themes, so it opts out of the light-mode deep teal. */
+  --color-primary-text: #5EEAD4;
+  --color-primary-text-hover: #99F6E4;
   position: relative;
   isolation: isolate;
   color: #fff;
@@ -845,7 +862,9 @@ html[dir="rtl"] .scroll-progress { transform-origin: right center; }
   font-size: 16px;
   box-shadow: inset 0 1px 2px rgba(10, 35, 32, 0.04);
 }
-.form-control::placeholder { color: var(--color-text-muted); opacity: 0.75; }
+/* No opacity dial-down here — the muted tone is already lighter than body
+   text, and fading it further pushed placeholders under AA. */
+.form-control::placeholder { color: var(--color-text-muted); opacity: 1; }
 .form-control:hover { border-color: var(--color-border-strong); background-color: var(--color-bg-alt); }
 .form-control:focus {
   outline: none;
@@ -880,7 +899,9 @@ html[dir="rtl"] select.form-control, html[dir="rtl"] .filter-select {
 /* Footer */
 .footer {
   --color-heading: #FFFFFF;
-  --color-text-muted: rgba(233, 245, 242, 0.62);
+  --color-primary-text: #5EEAD4;
+  --color-primary-text-hover: #99F6E4;
+  --color-text-muted: rgba(233, 245, 242, 0.74);
   --color-border: rgba(255, 255, 255, 0.10);
   --color-bg: rgba(255, 255, 255, 0.06);
   position: relative;
@@ -1611,7 +1632,7 @@ html[dir="rtl"] .timeline { --timeline-shift: -8px; }
   font-family: var(--font-heading);
   font-weight: 700;
   letter-spacing: 0.02em;
-  color: var(--color-primary);
+  color: var(--color-primary-text);
   transition: color 0.3s ease;
 }
 .timeline-title {
@@ -1705,7 +1726,7 @@ html[dir="rtl"] .timeline { --timeline-shift: -8px; }
 .tutor-rate {
   font-weight: 700;
   font-family: var(--font-heading);
-  color: var(--color-primary);
+  color: var(--color-primary-text);
   letter-spacing: -0.02em;
   text-align: center;
 }
@@ -2135,7 +2156,7 @@ html[dir="rtl"] .filter-select { background-position: left 2px center; padding-r
   border-radius: var(--border-radius-full);
   background-color: var(--color-secondary);
   border: 1px solid rgba(13, 148, 136, 0.22);
-  color: var(--color-primary-hover);
+  color: var(--color-primary-text);
   font-weight: 600;
   font-family: var(--font-heading);
   font-size: 14.5px;
