@@ -455,4 +455,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ---------------------------------------------------------------
+     Pointer spotlight — writes the cursor position into --mx/--my on
+     the hovered tile so CSS can paint a radial highlight under it.
+     Pointer events only: touch and keyboard fall back to the centred
+     default already declared in the stylesheet.
+  --------------------------------------------------------------- */
+  document.querySelectorAll('[data-spotlight]').forEach(board => {
+    board.addEventListener('pointermove', e => {
+      if (e.pointerType !== 'mouse') return;
+      const tile = e.target.closest('.cat-tile');
+      if (!tile) return;
+      const rect = tile.getBoundingClientRect();
+      tile.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+      tile.style.setProperty('--my', `${e.clientY - rect.top}px`);
+    });
+    board.addEventListener('pointerleave', () => {
+      board.querySelectorAll('.cat-tile').forEach(tile => {
+        tile.style.removeProperty('--mx');
+        tile.style.removeProperty('--my');
+      });
+    });
+  });
+
 });
