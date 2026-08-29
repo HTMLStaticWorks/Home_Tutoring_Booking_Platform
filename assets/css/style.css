@@ -1370,12 +1370,39 @@ html[dir="rtl"] .hero-rating { margin-left: 0; margin-right: 6px; }
 /* Keep the four cards on one rhythm: heading and copy start at the same
    height in every card, and the copy block absorbs the leftover space. */
 .step-card h3 {
-  margin-bottom: var(--spacing-2);
+  margin-bottom: var(--spacing-4);
 }
-.step-card p {
-  margin-top: 0;
-  margin-bottom: 0;
-  max-width: 30ch;
+/* Two bullets per card instead of a sentence. The list is a centred column
+   of shrink-to-fit rows, so each row is centred in the card while its icon
+   and label stay locked together on one baseline. */
+.step-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  /* stretch, not center: the list itself is centred in the card (it shrinks
+     to its widest row), and the rows then fill that width so every bullet
+     icon starts on the same left edge instead of each row centring alone. */
+  align-items: stretch;
+  gap: var(--spacing-2);
+}
+.step-points li {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-align: left;
+  max-width: 24ch;
+}
+.step-points i {
+  flex-shrink: 0;
+  font-size: 16px;
+  /* Sits on the first line rather than the middle of a wrapped row. */
+  margin-top: 1px;
+  color: var(--color-primary-text);
 }
 
 .step-card:hover {
